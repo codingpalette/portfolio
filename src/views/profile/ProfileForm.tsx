@@ -1,0 +1,264 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useAuthStore } from "@features/auth";
+import { createClient } from "@shared/api/supabase/client";
+
+export default function ProfileForm() {
+  const { user, initialize } = useAuthStore();
+  const [name, setName] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (user) {
+      setName(user.profile.name);
+      setAvatarUrl(user.profile.avatar_url);
+    }
+  }, [user]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setMessage({ type: "error", text: "이미지 파일만 업로드 가능합니다" });
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      setMessage({ type: "error", text: "파일 크기는 2MB 이하여야 합니다" });
+      return;
+    }
+
+    setAvatarFile(file);
+    setPreview(URL.createObjectURL(file));
+    setMessage(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+
+    setSaving(true);
+    setMessage(null);
+
+    const supabase = createClient();
+    let newAvatarUrl = avatarUrl;
+
+    if (avatarFile) {
+      const ext = avatarFile.name.split(".").pop();
+      const filePath = `${user.id}/avatar.${ext}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(filePath, avatarFile, { upsert: true });
+
+      if (uploadError) {
+        setMessage({ type: "error", text: "이미지 업로드에 실패했습니다" });
+        setSaving(false);
+        return;
+      }
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("avatars").getPublicUrl(filePath);
+
+      newAvatarUrl = publicUrl;
+    }
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({ name, avatar_url: newAvatarUrl })
+      .eq("id", user.id);
+
+    if (error) {
+      setMessage({ type: "error", text: "프로필 수정에 실패했습니다" });
+      setSaving(false);
+      return;
+    }
+
+    setAvatarFile(null);
+    setPreview(null);
+    await initialize();
+    setMessage({ type: "success", text: "프로필이 수정되었습니다" });
+    setSaving(false);
+  };
+
+  if (!user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-950">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+      </div>
+    );
+  }
+
+  const displayImage = preview ?? avatarUrl;
+
+  return (
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-md">
+        <div className="mb-8 text-center">
+          <Link
+            href="/"
+            className="inline-block text-2xl font-bold text-white"
+          >
+            이성재
+            <span className="ml-1 text-sm font-normal text-gray-500">
+              .dev
+            </span>
+          </Link>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+          <div className="mb-6 text-center">
+            <h1 className="text-2xl font-bold text-white">프로필 수정</h1>
+            <p className="mt-2 text-sm text-gray-400">
+              프로필 정보를 변경하세요
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {message && (
+              <div
+                className={`rounded-lg border px-4 py-3 text-sm ${
+                  message.type === "success"
+                    ? "border-green-500/30 bg-green-500/10 text-green-300"
+                    : "border-red-500/30 bg-red-500/10 text-red-300"
+                }`}
+              >
+                {message.text}
+              </div>
+            )}
+
+            {/* 프로필 이미지 */}
+            <div className="flex flex-col items-center gap-3">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="group relative h-24 w-24 overflow-hidden rounded-full border-2 border-white/10 transition-all hover:border-cyan-500/50"
+              >
+                {displayImage ? (
+                  <Image
+                    src={displayImage}
+                    alt="프로필 이미지"
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-gray-800 text-2xl font-bold text-gray-400">
+                    {name?.[0]?.toUpperCase() ?? "?"}
+                  </div>
+                )}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                  <svg
+                    className="h-6 w-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+              <p className="text-xs text-gray-500">
+                클릭하여 이미지 변경 (최대 2MB)
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="userId"
+                className="block text-sm font-medium text-gray-300"
+              >
+                아이디
+              </label>
+              <input
+                id="userId"
+                type="text"
+                value={user.email.replace("@portfolio.local", "")}
+                disabled
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-gray-500 outline-none"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-300"
+              >
+                이름
+              </label>
+              <input
+                id="name"
+                type="text"
+                placeholder="표시할 이름"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-300">
+                권한
+              </label>
+              <div className="flex items-center gap-2">
+                <span
+                  className={`rounded px-2 py-1 text-xs font-medium ${
+                    user.profile.role === "admin"
+                      ? "bg-cyan-500/20 text-cyan-400"
+                      : "bg-gray-700/50 text-gray-400"
+                  }`}
+                >
+                  {user.profile.role === "admin" ? "Admin" : "User"}
+                </span>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={saving}
+              className="w-full rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-500 px-4 py-2.5 text-sm font-medium text-white transition-all hover:from-cyan-400 hover:to-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {saving ? "저장 중..." : "저장"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
