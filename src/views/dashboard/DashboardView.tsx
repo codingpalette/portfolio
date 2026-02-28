@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuthStore } from "@features/auth";
@@ -48,8 +49,25 @@ const quickLinks = [
   },
 ];
 
-export default function DashboardView() {
+type TabKey = "links" | "stats" | "leaderboard";
+
+const TABS: { key: TabKey; label: string }[] = [
+  { key: "links", label: "바로가기" },
+  { key: "stats", label: "게임 통계" },
+  { key: "leaderboard", label: "리더보드" },
+];
+
+interface DashboardViewProps {
+  gameStatsSlot?: ReactNode;
+  leaderboardSlot?: ReactNode;
+}
+
+export default function DashboardView({
+  gameStatsSlot,
+  leaderboardSlot,
+}: DashboardViewProps) {
   const { user } = useAuthStore();
+  const [activeTab, setActiveTab] = useState<TabKey>("links");
 
   if (!user) {
     return (
@@ -115,25 +133,55 @@ export default function DashboardView() {
           </div>
         </div>
 
-        {/* 빠른 링크 */}
-        <h2 className="mb-4 text-lg font-semibold text-white">바로가기</h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {quickLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+        {/* 탭 */}
+        <div className="mb-6 flex gap-2 border-b border-white/10 pb-3">
+          {TABS.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+                activeTab === tab.key
+                  ? "bg-cyan-500/20 text-cyan-300"
+                  : "text-gray-400 hover:bg-white/5 hover:text-gray-300"
+              }`}
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 transition-colors group-hover:bg-cyan-500/20">
-                {link.icon}
-              </div>
-              <div>
-                <p className="text-sm font-medium text-white">{link.label}</p>
-                <p className="text-xs text-gray-500">{link.description}</p>
-              </div>
-            </Link>
+              {tab.label}
+            </button>
           ))}
         </div>
+
+        {/* 탭 콘텐츠 */}
+        {activeTab === "links" && (
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {quickLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 transition-colors group-hover:bg-cyan-500/20">
+                  {link.icon}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">{link.label}</p>
+                  <p className="text-xs text-gray-500">{link.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {activeTab === "stats" && (
+          gameStatsSlot ?? (
+            <p className="text-sm text-gray-500">로그인 후 게임을 플레이하면 통계가 표시됩니다.</p>
+          )
+        )}
+
+        {activeTab === "leaderboard" && (
+          leaderboardSlot ?? (
+            <p className="text-sm text-gray-500">아직 기록이 없습니다.</p>
+          )
+        )}
       </div>
     </div>
   );

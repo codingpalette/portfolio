@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback, useRef } from "react";
 import { use2048Store, Tile } from "./hooks/use-2048-store";
+import { useSubmitScore } from "@features/game-score";
 
 const TILE_COLORS: Record<number, string> = {
   2: "bg-gray-700 text-gray-200",
@@ -208,6 +209,19 @@ export default function Game2048() {
   const startGame = use2048Store((s) => s.startGame);
   const undoMove = use2048Store((s) => s.undoMove);
   const history = use2048Store((s) => s.history);
+
+  const { submitScore, resetSubmission } = useSubmitScore("2048");
+
+  // Score submission
+  useEffect(() => {
+    if (gameState === "gameover" || gameState === "win") {
+      const maxTile = Math.max(...use2048Store.getState().tiles.map((t) => t.value));
+      submitScore(score, { max_tile: maxTile });
+    }
+    if (gameState === "playing") {
+      resetSubmission();
+    }
+  }, [gameState, score, submitScore, resetSubmission]);
 
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 

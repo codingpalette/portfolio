@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import { useSnakeStore, Direction, Point } from "./hooks/use-snake-store";
+import { useSubmitScore } from "@features/game-score";
 
 const CELL_SIZE = 24;
 
@@ -191,11 +192,23 @@ export default function SnakeGame() {
     highScore,
     speed,
     gridSize,
+    foodEaten,
     startGame,
     enqueueDirection,
     tick,
     resetGame,
   } = useSnakeStore();
+
+  const { submitScore, resetSubmission } = useSubmitScore("snake");
+
+  useEffect(() => {
+    if (gameState === "gameover") {
+      submitScore(score, { food_eaten: foodEaten });
+    }
+    if (gameState === "playing") {
+      resetSubmission();
+    }
+  }, [gameState, score, foodEaten, submitScore, resetSubmission]);
 
   // Resize canvas to fit container maintaining square aspect ratio
   const resizeCanvas = useCallback(() => {

@@ -3,6 +3,7 @@
 import { useEffect, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useGameStore } from "./hooks/use-game-store";
+import { useSubmitScore } from "@features/game-score";
 import Road from "./components/Road";
 import PlayerCar from "./components/PlayerCar";
 import ObstacleComponent from "./components/Obstacle";
@@ -172,6 +173,20 @@ function Scene() {
 }
 
 export default function RacingGame() {
+  const score = useGameStore((s) => s.score);
+  const speed = useGameStore((s) => s.speed);
+  const gameState = useGameStore((s) => s.gameState);
+  const { submitScore, resetSubmission } = useSubmitScore("racing");
+
+  useEffect(() => {
+    if (gameState === "gameover") {
+      submitScore(Math.floor(score), { max_speed: Math.floor(speed) });
+    }
+    if (gameState === "playing") {
+      resetSubmission();
+    }
+  }, [gameState, score, speed, submitScore, resetSubmission]);
+
   return (
     <div className="relative h-[calc(100vh-60px)] w-full bg-gray-950 mt-[60px]">
       <Canvas

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import { useSubmitScore } from "@features/game-score";
 import {
   useMinesweeperStore,
   DIFFICULTY_CONFIGS,
@@ -242,6 +243,17 @@ export default function MinesweeperGame() {
     resetGame,
     goToMenu,
   } = useMinesweeperStore();
+
+  const { submitScore, resetSubmission } = useSubmitScore("minesweeper");
+
+  useEffect(() => {
+    if (gameState === "win") {
+      submitScore(timer, { difficulty });
+    }
+    if (gameState === "playing") {
+      resetSubmission();
+    }
+  }, [gameState, timer, difficulty, submitScore, resetSubmission]);
 
   // Determine cell size based on difficulty
   const cellSize =

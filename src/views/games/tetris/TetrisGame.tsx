@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useCallback, useRef } from "react";
+import { useSubmitScore } from "@features/game-score";
 import {
   useTetrisStore,
   BOARD_WIDTH,
@@ -480,6 +481,21 @@ function KeyboardHandler() {
 // ─── Main Game ────────────────────────────────────────────────────────────────
 
 export default function TetrisGame() {
+  const score = useTetrisStore((s) => s.score);
+  const lines = useTetrisStore((s) => s.lines);
+  const level = useTetrisStore((s) => s.level);
+  const gameState = useTetrisStore((s) => s.gameState);
+  const { submitScore, resetSubmission } = useSubmitScore("tetris");
+
+  useEffect(() => {
+    if (gameState === "gameover") {
+      submitScore(score, { lines, level });
+    }
+    if (gameState === "playing") {
+      resetSubmission();
+    }
+  }, [gameState, score, lines, level, submitScore, resetSubmission]);
+
   return (
     <div className="relative h-[calc(100vh-60px)] mt-[60px] w-full bg-gray-950 flex items-center justify-center overflow-hidden">
       <GameLoop />
