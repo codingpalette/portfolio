@@ -1,12 +1,10 @@
-import { Hero3D } from "@widgets/hero";
-import { AboutSection } from "@widgets/about";
 import { ProjectGallery } from "@widgets/projects";
 import { createClient } from "@shared/api/supabase/server";
 import type { Project } from "@entities/project";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
+export default async function ProjectsPage() {
   const supabase = await createClient();
   const { data } = await supabase
     .from("projects")
@@ -17,8 +15,6 @@ export default async function Home() {
 
   return (
     <main>
-      <Hero3D />
-      <AboutSection />
       <ProjectGallery projects={(data as Project[]) ?? []} />
     </main>
   );
