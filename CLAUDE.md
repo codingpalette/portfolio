@@ -32,6 +32,7 @@ src/
 │   ├── (main)/             # 메인 레이아웃 그룹 (Header 포함)
 │   │   ├── admin/          # 관리자 페이지 (role: admin)
 │   │   ├── games/          # 미니게임 (2048, 레이싱, 테트리스, 지뢰찾기, 스네이크)
+│   │   ├── guestbook/       # 방명록 페이지
 │   │   └── profile/        # 프로필 페이지
 │   ├── (auth)/             # 인증 레이아웃 그룹 (login, signup)
 │   └── auth/callback/      # OAuth 콜백
@@ -42,7 +43,8 @@ src/
 │   └── config/             # 설정
 ├── entities/               # 엔티티 레이어
 │   ├── user/               # 유저 타입 (Profile, Role, UserWithProfile)
-│   └── project/            # 프로젝트 타입 (Project)
+│   ├── project/            # 프로젝트 타입 (Project)
+│   └── guestbook/          # 방명록 타입 (GuestbookEntry)
 ├── features/               # 기능 레이어
 │   └── auth/               # 인증 (AuthProvider, RequireRole, useAuthStore)
 ├── widgets/                # 위젯 레이어
@@ -93,6 +95,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 
 - `profiles` - 유저 프로필 (id, name, role, avatar_url)
 - `projects` - 포트폴리오 프로젝트 (title, description, techs, category, link, github, thumbnail_url, sort_order, is_published)
+- `guestbook_entries` - 방명록 (id, user_id, author_name, message, created_at)
 
 ### 마이그레이션
 
