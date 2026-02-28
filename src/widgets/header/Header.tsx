@@ -6,7 +6,6 @@ import { useAuthStore } from "@features/auth";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
   { label: "Guestbook", href: "/guestbook" },
   { label: "Games", href: "/games" },
 ];
