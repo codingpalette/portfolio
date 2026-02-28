@@ -28,7 +28,7 @@ function ReactLogo() {
 
     // 스크롤 시 축소 (0~0.5 구간에서 1→0)
     const p = scrollProgressRef.current.value;
-    const s = MathUtils.lerp(groupRef.current.scale.x, p < 0.3 ? 0.7 : 0, delta * 5);
+    const s = MathUtils.lerp(groupRef.current.scale.x, p < 0.2 ? 0.7 : 0, delta * 5);
     groupRef.current.scale.setScalar(s);
   });
 
@@ -125,7 +125,7 @@ function AIBrain() {
 
     // 스크롤 시 확대 (0.3~0.6 구간에서 0→0.9)
     const p = scrollProgressRef.current.value;
-    const s = MathUtils.lerp(groupRef.current.scale.x, p > 0.4 ? 0.9 : 0, delta * 5);
+    const s = MathUtils.lerp(groupRef.current.scale.x, p > 0.2 && p < 0.65 ? 0.9 : 0, delta * 5);
     groupRef.current.scale.setScalar(s);
   });
 
@@ -171,7 +171,112 @@ function AIBrain() {
   );
 }
 
-/* ── 씬 (하나의 Canvas 안에 두 모델) ── */
+/* ── Builder 오케스트레이터 3D ── */
+function BuilderOrchestrator() {
+  const groupRef = useRef<Group>(null);
+  const orbit1 = useRef<Group>(null);
+  const orbit2 = useRef<Group>(null);
+  const orbit3 = useRef<Group>(null);
+
+  useFrame((_, delta) => {
+    if (!groupRef.current) return;
+    groupRef.current.rotation.y += delta * 0.2;
+
+    if (orbit1.current) orbit1.current.rotation.y += delta * 0.8;
+    if (orbit2.current) orbit2.current.rotation.y += delta * 0.6;
+    if (orbit3.current) orbit3.current.rotation.z += delta * 0.7;
+
+    const p = scrollProgressRef.current.value;
+    const s = MathUtils.lerp(groupRef.current.scale.x, p > 0.65 ? 0.8 : 0, delta * 5);
+    groupRef.current.scale.setScalar(s);
+  });
+
+  const mainColor = "#f59e0b";
+  const accent1 = "#f97316";
+  const accent2 = "#fb923c";
+
+  return (
+    <group ref={groupRef} scale={0}>
+      {/* 중앙 다면체 - Builder */}
+      <mesh>
+        <dodecahedronGeometry args={[0.6, 0]} />
+        <meshStandardMaterial
+          color={mainColor}
+          emissive={mainColor}
+          emissiveIntensity={0.6}
+          roughness={0.1}
+          metalness={0.9}
+          wireframe
+        />
+      </mesh>
+
+      {/* 궤도 1 - 시스템 아키텍처 (큐브) */}
+      <group ref={orbit1}>
+        <mesh position={[1.8, 0, 0]}>
+          <boxGeometry args={[0.25, 0.25, 0.25]} />
+          <meshStandardMaterial
+            color={mainColor}
+            emissive={mainColor}
+            emissiveIntensity={0.5}
+            roughness={0.2}
+            metalness={0.8}
+          />
+        </mesh>
+        <Line
+          points={[new Vector3(0, 0, 0), new Vector3(1.8, 0, 0)]}
+          color={mainColor}
+          transparent
+          opacity={0.3}
+          lineWidth={1}
+        />
+      </group>
+
+      {/* 궤도 2 - 프로덕트 센스 (사면체) */}
+      <group ref={orbit2} rotation={[0, (Math.PI * 2) / 3, 0]}>
+        <mesh position={[1.6, 0, 0]}>
+          <tetrahedronGeometry args={[0.2]} />
+          <meshStandardMaterial
+            color={accent1}
+            emissive={accent1}
+            emissiveIntensity={0.5}
+            roughness={0.2}
+            metalness={0.8}
+          />
+        </mesh>
+        <Line
+          points={[new Vector3(0, 0, 0), new Vector3(1.6, 0, 0)]}
+          color={accent1}
+          transparent
+          opacity={0.3}
+          lineWidth={1}
+        />
+      </group>
+
+      {/* 궤도 3 - 프롬프트 엔지니어링 (팔면체) */}
+      <group ref={orbit3} rotation={[Math.PI / 4, (Math.PI * 4) / 3, 0]}>
+        <mesh position={[1.4, 0, 0]}>
+          <octahedronGeometry args={[0.18]} />
+          <meshStandardMaterial
+            color={accent2}
+            emissive={accent2}
+            emissiveIntensity={0.5}
+            roughness={0.2}
+            metalness={0.8}
+          />
+        </mesh>
+        <Line
+          points={[new Vector3(0, 0, 0), new Vector3(1.4, 0, 0)]}
+          color={accent2}
+          transparent
+          opacity={0.3}
+          lineWidth={1}
+        />
+      </group>
+    </group>
+  );
+}
+
+/* ── 씬 (하나의 Canvas 안에 세 모델) ── */
 function Scene() {
   return (
     <>
@@ -179,22 +284,25 @@ function Scene() {
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <pointLight position={[-5, -5, -5]} intensity={0.5} color="#a78bfa" />
       <pointLight position={[3, 3, 3]} intensity={0.4} color="#a855f7" />
+      <pointLight position={[0, -3, 5]} intensity={0.3} color="#f59e0b" />
       <ReactLogo />
       <AIBrain />
+      <BuilderOrchestrator />
       <OrbitControls enableZoom={false} enablePan={false} />
     </>
   );
 }
 
 const frontendSkills = ["React", "TypeScript", "Next.js", "Flutter"];
-const backendSkills = ["Python", "FastAPI", "PHP", "NestJS", "Supabase"];
+const backendSkills = ["Python", "FastAPI", "PHP", "NestJS", "Supabase", "RubyonRails"];
 const aiMainSkills = [
   "Claude Code",
   "CLAUDE.md 설계",
   "MCP 서버 연동",
   "클로드 스킬 작성",
 ];
-const aiSubSkills = ["Gemini"];
+const aiSubSkills = ["Gemini", "Codex"];
+const builderSkills = ["시스템 아키텍처 설계", "프로덕트 센스", "프롬프트 엔지니어링"];
 
 export default function Hero3D() {
   const container = useRef<HTMLDivElement>(null);
@@ -219,7 +327,7 @@ export default function Hero3D() {
           scrollTrigger: {
             trigger: ".pin-wrapper",
             start: "top top",
-            end: "+=100%",
+            end: "+=200%",
             pin: true,
             scrub: 0.5,
             onUpdate: (self) => {
@@ -229,13 +337,22 @@ export default function Hero3D() {
         });
 
         scrollTl
-          .to(".hero-text", { opacity: 0, x: -80, duration: 1, ease: "power2.in" }, 0)
-          .to(".canvas-wrap", { xPercent: -120, duration: 1, ease: "power2.inOut" }, 0)
+          // Phase 1→2: hero-text out, ai-section in
+          .to(".hero-text", { opacity: 0, x: -80, duration: 0.5, ease: "power2.in" }, 0)
+          .to(".canvas-wrap", { xPercent: -120, duration: 0.5, ease: "power2.inOut" }, 0)
           .fromTo(
             ".ai-section",
             { opacity: 0, x: 100, pointerEvents: "none" },
-            { opacity: 1, x: 0, pointerEvents: "auto", duration: 1, ease: "power2.out" },
-            0.3,
+            { opacity: 1, x: 0, pointerEvents: "auto", duration: 0.5, ease: "power2.out" },
+            0.15,
+          )
+          // Phase 2→3: ai-section out, builder-section in
+          .to(".ai-section", { opacity: 0, pointerEvents: "none", duration: 0.3, ease: "power2.in" }, 0.5)
+          .fromTo(
+            ".builder-section",
+            { opacity: 0, y: 30, pointerEvents: "none" },
+            { opacity: 1, y: 0, pointerEvents: "auto", duration: 0.5, ease: "power2.out" },
+            0.6,
           );
       });
 
@@ -245,7 +362,7 @@ export default function Hero3D() {
           scrollTrigger: {
             trigger: ".pin-wrapper",
             start: "top top",
-            end: "+=100%",
+            end: "+=200%",
             pin: true,
             scrub: 0.5,
             onUpdate: (self) => {
@@ -255,13 +372,22 @@ export default function Hero3D() {
         });
 
         scrollTl
-          .to(".hero-text", { opacity: 0, y: -60, duration: 1, ease: "power2.in" }, 0)
-          .to(".canvas-wrap", { y: -80, duration: 1, ease: "power2.inOut" }, 0)
+          // Phase 1→2: hero-text out, ai-section in
+          .to(".hero-text", { opacity: 0, y: -60, duration: 0.5, ease: "power2.in" }, 0)
+          .to(".canvas-wrap", { y: -80, duration: 0.5, ease: "power2.inOut" }, 0)
           .fromTo(
             ".ai-section",
             { opacity: 0, y: 60, pointerEvents: "none" },
-            { opacity: 1, y: 0, pointerEvents: "auto", duration: 1, ease: "power2.out" },
-            0.3,
+            { opacity: 1, y: 0, pointerEvents: "auto", duration: 0.5, ease: "power2.out" },
+            0.15,
+          )
+          // Phase 2→3: ai-section out, builder-section in
+          .to(".ai-section", { opacity: 0, pointerEvents: "none", duration: 0.3, ease: "power2.in" }, 0.5)
+          .fromTo(
+            ".builder-section",
+            { opacity: 0, y: 40, pointerEvents: "none" },
+            { opacity: 1, y: 0, pointerEvents: "auto", duration: 0.5, ease: "power2.out" },
+            0.6,
           );
       });
     },
@@ -333,8 +459,8 @@ export default function Hero3D() {
               </div>
             </div>
 
-            {/* 오른쪽: AI 스킬 섹션 */}
-            <div id="ai" className="ai-section pointer-events-none absolute inset-x-6 bottom-8 space-y-4 opacity-0 sm:space-y-6 lg:inset-x-auto lg:right-12 lg:bottom-auto lg:w-[45%]">
+            {/* AI 스킬 섹션 */}
+            <div id="ai" className="ai-section pointer-events-none absolute inset-x-6 top-1/2 -translate-y-1/2 space-y-4 opacity-0 sm:space-y-6 lg:inset-x-auto lg:right-12 lg:w-[45%]">
               <p className="text-sm font-semibold tracking-widest text-purple-400 uppercase">
                 AI-Driven Development
               </p>
@@ -372,6 +498,39 @@ export default function Hero3D() {
                     <span
                       key={skill}
                       className="rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-sm text-pink-300"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Builder 섹션 */}
+            <div id="builder" className="builder-section pointer-events-none absolute inset-x-6 top-1/2 -translate-y-1/2 space-y-4 opacity-0 sm:space-y-6 lg:inset-x-auto lg:right-12 lg:w-[45%]">
+              <p className="text-sm font-semibold tracking-widest text-amber-400 uppercase">
+                The New Role
+              </p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+                Builder
+                <span className="mt-2 block bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-xl font-medium text-transparent sm:text-2xl lg:text-3xl">
+                  AI를 지휘하여 제품을 완성하다
+                </span>
+              </h2>
+              <p className="max-w-md text-base leading-relaxed text-gray-400 sm:text-lg">
+                코드를 직접 짜는 시대에서, 문제를 정의하고 AI를 오케스트레이션하여
+                제품을 끝까지 완성해내는 빌더의 시대로.
+                설계력과 프로덕트 센스로 AI 에이전트를 지휘합니다.
+              </p>
+              <div className="space-y-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-400/70">
+                    Core
+                  </span>
+                  {builderSkills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-sm text-amber-300"
                     >
                       {skill}
                     </span>
