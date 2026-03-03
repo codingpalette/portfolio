@@ -19,7 +19,7 @@ export default function BlogDetail({ post }: { post: BlogPost }) {
   return (
     <article className="mx-auto max-w-3xl">
       <header className="mb-10">
-        <div className="mb-4 flex items-center gap-3 text-sm text-gray-500">
+        <div className="mb-4 flex items-center gap-3 text-sm text-muted-foreground">
           <span>{post.author_name}</span>
           {post.published_at && (
             <>
@@ -28,7 +28,7 @@ export default function BlogDetail({ post }: { post: BlogPost }) {
             </>
           )}
         </div>
-        <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
+        <h1 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl">
           {post.title}
         </h1>
         {post.tags.length > 0 && (
@@ -36,7 +36,7 @@ export default function BlogDetail({ post }: { post: BlogPost }) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-400"
+                className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-600 dark:text-cyan-400"
               >
                 {tag}
               </span>

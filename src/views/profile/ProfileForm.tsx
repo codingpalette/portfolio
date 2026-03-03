@@ -96,7 +96,7 @@ export default function ProfileForm() {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-950">
+      <div className="flex min-h-screen items-center justify-center bg-background">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
       </div>
     );
@@ -105,7 +105,7 @@ export default function ProfileForm() {
   const displayImage = preview ?? avatarUrl;
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4">
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-card to-background px-4">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
         <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
@@ -115,19 +115,19 @@ export default function ProfileForm() {
         <div className="mb-8 text-center">
           <Link
             href="/"
-            className="inline-block text-2xl font-bold text-white"
+            className="inline-block text-2xl font-bold text-foreground"
           >
             이성재
-            <span className="ml-1 text-sm font-normal text-gray-500">
+            <span className="ml-1 text-sm font-normal text-muted-foreground">
               .dev
             </span>
           </Link>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+        <div className="rounded-2xl border border-border bg-muted/50 p-8 backdrop-blur-sm">
           <div className="mb-6 text-center">
-            <h1 className="text-2xl font-bold text-white">프로필 수정</h1>
-            <p className="mt-2 text-sm text-gray-400">
+            <h1 className="text-2xl font-bold text-foreground">프로필 수정</h1>
+            <p className="mt-2 text-sm text-muted-foreground">
               프로필 정보를 변경하세요
             </p>
           </div>
@@ -137,8 +137,8 @@ export default function ProfileForm() {
               <div
                 className={`rounded-lg border px-4 py-3 text-sm ${
                   message.type === "success"
-                    ? "border-green-500/30 bg-green-500/10 text-green-300"
-                    : "border-red-500/30 bg-red-500/10 text-red-300"
+                    ? "border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-300"
+                    : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-300"
                 }`}
               >
                 {message.text}
@@ -150,7 +150,7 @@ export default function ProfileForm() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="group relative h-24 w-24 overflow-hidden rounded-full border-2 border-white/10 transition-all hover:border-cyan-500/50"
+                className="group relative h-24 w-24 overflow-hidden rounded-full border-2 border-border transition-all hover:border-cyan-500/50"
               >
                 {displayImage ? (
                   <Image
@@ -160,13 +160,13 @@ export default function ProfileForm() {
                     className="object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-gray-800 text-2xl font-bold text-gray-400">
+                  <div className="flex h-full w-full items-center justify-center bg-muted text-2xl font-bold text-muted-foreground">
                     {name?.[0]?.toUpperCase() ?? "?"}
                   </div>
                 )}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
                   <svg
-                    className="h-6 w-6 text-white"
+                    className="h-6 w-6 text-foreground"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -193,7 +193,7 @@ export default function ProfileForm() {
                 onChange={handleFileChange}
                 className="hidden"
               />
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 클릭하여 이미지 변경 (최대 2MB)
               </p>
             </div>
@@ -201,7 +201,7 @@ export default function ProfileForm() {
             <div className="space-y-2">
               <label
                 htmlFor="userId"
-                className="block text-sm font-medium text-gray-300"
+                className="block text-sm font-medium text-foreground"
               >
                 아이디
               </label>
@@ -210,14 +210,14 @@ export default function ProfileForm() {
                 type="text"
                 value={user.email.replace("@portfolio.local", "")}
                 disabled
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-gray-500 outline-none"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-muted-foreground outline-none"
               />
             </div>
 
             <div className="space-y-2">
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-300"
+                className="block text-sm font-medium text-foreground"
               >
                 이름
               </label>
@@ -228,20 +228,20 @@ export default function ProfileForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-300">
+              <label className="block text-sm font-medium text-foreground">
                 권한
               </label>
               <div className="flex items-center gap-2">
                 <span
                   className={`rounded px-2 py-1 text-xs font-medium ${
                     user.profile.role === "admin"
-                      ? "bg-cyan-500/20 text-cyan-400"
-                      : "bg-gray-700/50 text-gray-400"
+                      ? "bg-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+                      : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {user.profile.role === "admin" ? "Admin" : "User"}

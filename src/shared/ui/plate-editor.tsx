@@ -675,7 +675,7 @@ export default function PlateEditor({
       {!readOnly ? (
         <div
           className={cn(
-            "overflow-hidden rounded-lg border border-white/10 bg-white/5 transition-all focus-within:border-cyan-500/50 focus-within:ring-1 focus-within:ring-cyan-500/50",
+            "rounded-lg border border-border bg-card/50 transition-all focus-within:border-cyan-500/50 focus-within:ring-1 focus-within:ring-cyan-500/50",
             className,
           )}
         >
@@ -685,7 +685,7 @@ export default function PlateEditor({
               placeholder={placeholder}
               className={cn(
                 editorVariants({ variant }),
-                "plate-editor text-white outline-none",
+                "plate-editor text-foreground outline-none",
               )}
               disableDefaultStyles
             />
@@ -696,7 +696,7 @@ export default function PlateEditor({
           readOnly
           className={cn(
             editorVariants({ variant: "readOnly" }),
-            "plate-editor text-white outline-none",
+            "plate-editor text-foreground outline-none",
             className,
           )}
           disableDefaultStyles

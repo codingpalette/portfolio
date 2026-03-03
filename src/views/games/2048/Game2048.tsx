@@ -5,8 +5,8 @@ import { use2048Store, Tile } from "./hooks/use-2048-store";
 import { useSubmitScore } from "@features/game-score";
 
 const TILE_COLORS: Record<number, string> = {
-  2: "bg-gray-700 text-gray-200",
-  4: "bg-gray-600 text-gray-100",
+  2: "bg-muted dark:bg-gray-700 text-foreground",
+  4: "bg-muted dark:bg-gray-600 text-foreground",
   8: "bg-orange-600 text-white",
   16: "bg-orange-500 text-white",
   32: "bg-orange-400 text-white",
@@ -20,7 +20,7 @@ const TILE_COLORS: Record<number, string> = {
 
 function getTileColor(value: number): string {
   if (value >= 4096) return "bg-purple-500 text-white";
-  return TILE_COLORS[value] ?? "bg-gray-500 text-white";
+  return TILE_COLORS[value] ?? "bg-muted dark:bg-gray-500 text-foreground";
 }
 
 function getTileFontSize(value: number): string {
@@ -58,11 +58,11 @@ function Board() {
   const tiles = use2048Store((s) => s.tiles);
 
   return (
-    <div className="relative aspect-square w-full max-w-[400px] rounded-xl bg-gray-800 p-1">
+    <div className="relative aspect-square w-full max-w-[400px] rounded-xl bg-muted dark:bg-gray-800 p-1">
       {/* Background cells */}
       <div className="grid h-full grid-cols-4 grid-rows-4 gap-2 p-1">
         {Array.from({ length: 16 }).map((_, i) => (
-          <div key={i} className="rounded-lg bg-gray-700/50" />
+          <div key={i} className="rounded-lg bg-muted/50 dark:bg-gray-700/50" />
         ))}
       </div>
       {/* Tiles overlay */}
@@ -77,9 +77,9 @@ function Board() {
 
 function ScoreBox({ label, value }: { label: string; value: number }) {
   return (
-    <div className="flex min-w-[80px] flex-col items-center rounded-lg bg-gray-800 px-4 py-2">
-      <span className="text-xs font-semibold tracking-widest text-gray-400">{label}</span>
-      <span className="text-xl font-bold text-white">{value.toLocaleString()}</span>
+    <div className="flex min-w-[80px] flex-col items-center rounded-lg bg-muted dark:bg-gray-800 px-4 py-2">
+      <span className="text-xs font-semibold tracking-widest text-muted-foreground">{label}</span>
+      <span className="text-xl font-bold text-foreground">{value.toLocaleString()}</span>
     </div>
   );
 }
@@ -105,12 +105,12 @@ function MenuOverlay() {
   if (gameState !== "menu") return null;
 
   return (
-    <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-gray-950/80 backdrop-blur-sm">
+    <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-black/60 dark:bg-gray-950/80 backdrop-blur-sm">
       <div className="text-center">
-        <h1 className="mb-2 text-7xl font-extrabold text-cyan-400">2048</h1>
-        <p className="mb-6 text-gray-400">숫자 타일을 합쳐 2048을 만드세요!</p>
+        <h1 className="mb-2 text-7xl font-extrabold text-cyan-600 dark:text-cyan-400">2048</h1>
+        <p className="mb-6 text-muted-foreground">숫자 타일을 합쳐 2048을 만드세요!</p>
         {highScore > 0 && (
-          <p className="mb-4 text-sm text-indigo-400">
+          <p className="mb-4 text-sm text-indigo-600 dark:text-indigo-400">
             최고 점수: {highScore.toLocaleString()}
           </p>
         )}
@@ -120,7 +120,7 @@ function MenuOverlay() {
         >
           게임 시작
         </button>
-        <p className="mt-4 text-xs text-gray-500">화살표 키 또는 스와이프로 이동 | SPACE로 시작</p>
+        <p className="mt-4 text-xs text-muted-foreground">화살표 키 또는 스와이프로 이동 | SPACE로 시작</p>
       </div>
     </div>
   );
@@ -148,21 +148,21 @@ function GameOverOverlay() {
   if (gameState !== "gameover") return null;
 
   return (
-    <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-gray-950/80 backdrop-blur-sm">
+    <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-black/60 dark:bg-gray-950/80 backdrop-blur-sm">
       <div className="text-center">
-        <h2 className="mb-2 text-5xl font-extrabold text-red-400">게임 오버</h2>
-        <p className="mb-1 text-2xl font-bold text-white">{score.toLocaleString()} 점</p>
+        <h2 className="mb-2 text-5xl font-extrabold text-red-600 dark:text-red-400">게임 오버</h2>
+        <p className="mb-1 text-2xl font-bold text-foreground">{score.toLocaleString()} 점</p>
         {score > 0 && score >= highScore && (
-          <p className="mb-3 text-sm font-semibold text-yellow-400">새로운 최고 점수!</p>
+          <p className="mb-3 text-sm font-semibold text-yellow-600 dark:text-yellow-400">새로운 최고 점수!</p>
         )}
-        <p className="mb-6 text-sm text-gray-400">최고 점수: {highScore.toLocaleString()}</p>
+        <p className="mb-6 text-sm text-muted-foreground">최고 점수: {highScore.toLocaleString()}</p>
         <button
           onClick={handleRestart}
           className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-3 text-lg font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:scale-95"
         >
           다시 시작
         </button>
-        <p className="mt-3 text-xs text-gray-500">SPACE로 재시작</p>
+        <p className="mt-3 text-xs text-muted-foreground">SPACE로 재시작</p>
       </div>
     </div>
   );
@@ -177,11 +177,11 @@ function WinOverlay() {
   if (gameState !== "win") return null;
 
   return (
-    <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-gray-950/80 backdrop-blur-sm">
+    <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-black/60 dark:bg-gray-950/80 backdrop-blur-sm">
       <div className="text-center">
-        <h2 className="mb-2 text-5xl font-extrabold text-cyan-400">달성!</h2>
-        <p className="mb-1 text-xl text-white">2048 타일을 만들었습니다!</p>
-        <p className="mb-6 text-sm text-gray-400">점수: {score.toLocaleString()}</p>
+        <h2 className="mb-2 text-5xl font-extrabold text-cyan-600 dark:text-cyan-400">달성!</h2>
+        <p className="mb-1 text-xl text-foreground">2048 타일을 만들었습니다!</p>
+        <p className="mb-6 text-sm text-muted-foreground">점수: {score.toLocaleString()}</p>
         <div className="flex gap-3 justify-center">
           <button
             onClick={continueGame}
@@ -191,7 +191,7 @@ function WinOverlay() {
           </button>
           <button
             onClick={startGame}
-            className="rounded-xl border border-gray-600 bg-gray-700 px-6 py-3 font-semibold text-gray-200 transition hover:bg-gray-600 active:scale-95"
+            className="rounded-xl border border-border bg-muted dark:bg-gray-700 px-6 py-3 font-semibold text-foreground transition hover:bg-accent dark:hover:bg-gray-600 active:scale-95"
           >
             새 게임
           </button>
@@ -285,13 +285,13 @@ export default function Game2048() {
 
   return (
     <div
-      className="relative flex h-[calc(100vh-60px)] mt-[60px] w-full flex-col items-center justify-center bg-gray-950"
+      className="relative flex h-[calc(100vh-60px)] mt-[60px] w-full flex-col items-center justify-center bg-background"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* Header */}
       <div className="mb-4 flex w-full max-w-[400px] items-center justify-between px-1">
-        <h1 className="text-3xl font-extrabold text-cyan-400">2048</h1>
+        <h1 className="text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">2048</h1>
         <div className="flex gap-2">
           <ScoreBox label="점수" value={score} />
           <ScoreBox label="최고" value={highScore} />
@@ -303,14 +303,14 @@ export default function Game2048() {
         <div className="mb-3 flex w-full max-w-[400px] items-center justify-between px-1">
           <button
             onClick={startGame}
-            className="rounded-lg border border-gray-600 bg-gray-800 px-4 py-1.5 text-sm text-gray-300 transition hover:bg-gray-700 active:scale-95"
+            className="rounded-lg border border-border bg-muted dark:bg-gray-800 px-4 py-1.5 text-sm text-foreground transition hover:bg-accent dark:hover:bg-gray-700 active:scale-95"
           >
             새 게임
           </button>
           <button
             onClick={undoMove}
             disabled={history.length === 0}
-            className="rounded-lg border border-gray-600 bg-gray-800 px-4 py-1.5 text-sm text-gray-300 transition hover:bg-gray-700 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="rounded-lg border border-border bg-muted dark:bg-gray-800 px-4 py-1.5 text-sm text-foreground transition hover:bg-accent dark:hover:bg-gray-700 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
           >
             되돌리기
           </button>
@@ -327,7 +327,7 @@ export default function Game2048() {
 
       {/* Hint */}
       {gameState === "playing" && (
-        <p className="mt-4 text-xs text-gray-600">화살표 키 또는 스와이프로 이동</p>
+        <p className="mt-4 text-xs text-muted-foreground">화살표 키 또는 스와이프로 이동</p>
       )}
     </div>
   );

@@ -14,35 +14,35 @@ interface ProjectGalleryProps {
 }
 
 const techColors: Record<string, string> = {
-  React: "border-cyan-500/30 bg-cyan-500/10 text-cyan-300",
-  TypeScript: "border-blue-500/30 bg-blue-500/10 text-blue-300",
-  "Next.js": "border-white/20 bg-white/5 text-white",
-  Flutter: "border-sky-500/30 bg-sky-500/10 text-sky-300",
-  Python: "border-yellow-500/30 bg-yellow-500/10 text-yellow-300",
-  FastAPI: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
-  Supabase: "border-green-500/30 bg-green-500/10 text-green-300",
-  NestJS: "border-red-500/30 bg-red-500/10 text-red-300",
-  PHP: "border-indigo-500/30 bg-indigo-500/10 text-indigo-300",
-  "Claude Code": "border-purple-500/30 bg-purple-500/10 text-purple-300",
-  MCP: "border-purple-500/30 bg-purple-500/10 text-purple-300",
-  "SKILL.md": "border-pink-500/30 bg-pink-500/10 text-pink-300",
+  React: "border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300",
+  TypeScript: "border-blue-500/30 bg-blue-500/10 text-blue-700 dark:text-blue-300",
+  "Next.js": "border-border bg-muted/50 text-foreground",
+  Flutter: "border-sky-500/30 bg-sky-500/10 text-sky-700 dark:text-sky-300",
+  Python: "border-yellow-500/30 bg-yellow-500/10 text-yellow-600 dark:text-yellow-300",
+  FastAPI: "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
+  Supabase: "border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-300",
+  NestJS: "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-300",
+  PHP: "border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-300",
+  "Claude Code": "border-purple-500/30 bg-purple-500/10 text-purple-600 dark:text-purple-300",
+  MCP: "border-purple-500/30 bg-purple-500/10 text-purple-600 dark:text-purple-300",
+  "SKILL.md": "border-pink-500/30 bg-pink-500/10 text-pink-600 dark:text-pink-300",
 };
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <div
-      className={`project-card project-card-${index} group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10`}
+      className={`project-card project-card-${index} group relative overflow-hidden rounded-2xl border border-border bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-border hover:bg-card`}
     >
       {/* 카테고리 뱃지 */}
-      <span className="mb-4 inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-400">
+      <span className="mb-4 inline-block rounded-full border border-border bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
         {project.category}
       </span>
 
-      <h3 className="mb-2 text-xl font-bold text-white transition-colors group-hover:text-cyan-400">
+      <h3 className="mb-2 text-xl font-bold text-foreground transition-colors group-hover:text-cyan-400">
         {project.title}
       </h3>
 
-      <p className="mb-4 text-sm leading-relaxed text-gray-400">
+      <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
         {project.description}
       </p>
 
@@ -51,7 +51,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {project.techs.map((tech: string) => (
           <span
             key={tech}
-            className={`rounded-full border px-2 py-0.5 text-xs ${techColors[tech] ?? "border-gray-500/30 bg-gray-500/10 text-gray-300"}`}
+            className={`rounded-full border px-2 py-0.5 text-xs ${techColors[tech] ?? "border-border bg-muted text-foreground"}`}
           >
             {tech}
           </span>
@@ -75,7 +75,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-gray-400 transition-colors hover:text-white"
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             GitHub &rarr;
           </a>
@@ -141,7 +141,7 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
     <section
       id="projects"
       ref={container}
-      className="relative min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 py-24"
+      className="relative min-h-screen bg-gradient-to-b from-background via-card to-background py-24"
     >
       {/* 배경 효과 */}
       <div className="pointer-events-none absolute inset-0">
@@ -152,13 +152,13 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
       <div className="container relative z-10 mx-auto px-6">
         {/* 제목 */}
         <div className="projects-title mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-400 uppercase">
+          <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase">
             Portfolio
           </p>
-          <h2 className="text-4xl font-bold text-white sm:text-5xl">
+          <h2 className="text-4xl font-bold text-foreground sm:text-5xl">
             Projects
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-gray-400">
+          <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
             다양한 기술 스택을 활용하여 만든 프로젝트들입니다.
           </p>
         </div>
@@ -171,8 +171,8 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
               onClick={() => setActiveFilter(cat)}
               className={`rounded-full border px-4 py-1.5 text-sm transition-all ${
                 activeFilter === cat
-                  ? "border-cyan-500 bg-cyan-500/20 text-cyan-300"
-                  : "border-white/10 bg-white/5 text-gray-400 hover:border-white/20 hover:text-white"
+                  ? "border-cyan-500 bg-cyan-500/20 text-cyan-700 dark:text-cyan-300"
+                  : "border-border bg-muted/50 text-muted-foreground hover:border-border hover:text-foreground"
               }`}
             >
               {cat}
@@ -190,12 +190,12 @@ export default function ProjectGallery({ projects }: ProjectGalleryProps) {
         ) : (
           <div className="flex flex-col items-center justify-center py-20">
             <div className="mb-4 text-5xl opacity-30">
-              <svg className="mx-auto h-16 w-16 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="mx-auto h-16 w-16 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
             </div>
-            <p className="text-lg font-medium text-gray-500">프로젝트 준비 중입니다</p>
-            <p className="mt-2 text-sm text-gray-600">곧 새로운 프로젝트가 추가될 예정입니다</p>
+            <p className="text-lg font-medium text-muted-foreground">프로젝트 준비 중입니다</p>
+            <p className="mt-2 text-sm text-muted-foreground">곧 새로운 프로젝트가 추가될 예정입니다</p>
           </div>
         )}
       </div>

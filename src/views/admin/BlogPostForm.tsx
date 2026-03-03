@@ -43,7 +43,7 @@ function TagInput({
   };
 
   return (
-    <div className="flex min-h-[42px] flex-wrap gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2 transition-all focus-within:border-cyan-500/50 focus-within:ring-1 focus-within:ring-cyan-500/50">
+    <div className="flex min-h-[42px] flex-wrap gap-1.5 rounded-lg border border-border bg-card/50 px-3 py-2 transition-all focus-within:border-cyan-500/50 focus-within:ring-1 focus-within:ring-cyan-500/50">
       {tags.map((tag) => (
         <span
           key={tag}
@@ -53,7 +53,7 @@ function TagInput({
           <button
             type="button"
             onClick={() => onChange(tags.filter((t) => t !== tag))}
-            className="ml-0.5 text-cyan-400 hover:text-white"
+            className="ml-0.5 text-cyan-400 hover:text-foreground"
           >
             &times;
           </button>
@@ -66,7 +66,7 @@ function TagInput({
         onKeyDown={handleKeyDown}
         onBlur={() => addTag(input)}
         placeholder={tags.length === 0 ? placeholder : ""}
-        className="min-w-[120px] flex-1 bg-transparent text-sm text-white placeholder-gray-500 outline-none"
+        className="min-w-[120px] flex-1 bg-transparent text-sm text-foreground placeholder-muted-foreground outline-none"
       />
     </div>
   );
@@ -148,13 +148,13 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
 
   return (
     <div>
-      <h2 className="mb-6 text-xl font-bold text-white">
+      <h2 className="mb-6 text-xl font-bold text-foreground">
         {isEditing ? "포스트 수정" : "새 포스트"}
       </h2>
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-3xl space-y-5 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+        className="max-w-3xl space-y-5 rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm"
       >
         {error && (
           <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
@@ -165,7 +165,7 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
         <div className="space-y-2">
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-gray-300"
+            className="block text-sm font-medium text-foreground"
           >
             제목
           </label>
@@ -175,14 +175,14 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
             value={title}
             onChange={(e) => handleTitleChange(e.target.value)}
             required
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+            className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
           />
         </div>
 
         <div className="space-y-2">
           <label
             htmlFor="slug"
-            className="block text-sm font-medium text-gray-300"
+            className="block text-sm font-medium text-foreground"
           >
             슬러그
           </label>
@@ -192,9 +192,9 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
             required
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+            className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
           />
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-muted-foreground">
             URL에 사용될 슬러그 (제목 입력 시 자동 생성)
           </p>
         </div>
@@ -202,7 +202,7 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
         <div className="space-y-2">
           <label
             htmlFor="excerpt"
-            className="block text-sm font-medium text-gray-300"
+            className="block text-sm font-medium text-foreground"
           >
             요약
           </label>
@@ -212,12 +212,12 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
             value={excerpt}
             onChange={(e) => setExcerpt(e.target.value)}
             placeholder="포스트 요약 (목록에 표시)"
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+            className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
           />
         </div>
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-300">
+          <label className="block text-sm font-medium text-foreground">
             태그
           </label>
           <TagInput
@@ -225,13 +225,13 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
             onChange={setTags}
             placeholder="입력 후 Enter로 추가"
           />
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-muted-foreground">
             Enter 또는 쉼표(,)로 태그 추가, Backspace로 삭제
           </p>
         </div>
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-300">
+          <label className="block text-sm font-medium text-foreground">
             본문
           </label>
           <PlateEditor
@@ -250,9 +250,9 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
               type="checkbox"
               checked={isPublished}
               onChange={(e) => setIsPublished(e.target.checked)}
-              className="h-4 w-4 rounded border-gray-600 bg-gray-800 text-cyan-500 focus:ring-cyan-500/50"
+              className="h-4 w-4 rounded border-border bg-muted text-cyan-500 focus:ring-cyan-500/50"
             />
-            <span className="text-sm text-gray-300">공개</span>
+            <span className="text-sm text-foreground">공개</span>
           </label>
         </div>
 
@@ -260,14 +260,14 @@ export default function BlogPostForm({ post }: BlogPostFormProps) {
           <button
             type="submit"
             disabled={saving}
-            className="rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-500 px-6 py-2.5 text-sm font-medium text-white transition-all hover:from-cyan-400 hover:to-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-500 px-6 py-2.5 text-sm font-medium text-foreground transition-all hover:from-cyan-400 hover:to-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {saving ? "저장 중..." : isEditing ? "수정" : "등록"}
           </button>
           <button
             type="button"
             onClick={() => router.back()}
-            className="rounded-lg border border-white/10 bg-white/5 px-6 py-2.5 text-sm text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+            className="rounded-lg border border-border bg-card/50 px-6 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
           >
             취소
           </button>

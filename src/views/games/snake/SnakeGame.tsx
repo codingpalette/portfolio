@@ -27,6 +27,14 @@ function drawRoundedRect(
   ctx.closePath();
 }
 
+function getThemeColors() {
+  const isDark = document.documentElement.classList.contains("dark");
+  return {
+    background: isDark ? "#030712" : "#f8fafc",
+    gridLine: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.06)",
+  };
+}
+
 function drawCanvas(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
@@ -39,13 +47,14 @@ function drawCanvas(
 ) {
   const w = canvas.width / dpr;
   const h = canvas.height / dpr;
+  const themeColors = getThemeColors();
 
   // Background
-  ctx.fillStyle = "#030712";
+  ctx.fillStyle = themeColors.background;
   ctx.fillRect(0, 0, w, h);
 
   // Grid lines
-  ctx.strokeStyle = "rgba(255,255,255,0.04)";
+  ctx.strokeStyle = themeColors.gridLine;
   ctx.lineWidth = 0.5;
   for (let i = 0; i <= gridSize; i++) {
     ctx.beginPath();
@@ -331,20 +340,20 @@ export default function SnakeGame() {
 
   return (
     <div
-      className="flex flex-col items-center justify-start bg-gray-950 h-[calc(100vh-60px)] mt-[60px] select-none overflow-hidden"
+      className="flex flex-col items-center justify-start bg-background h-[calc(100vh-60px)] mt-[60px] select-none overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* HUD */}
       <div className="flex items-center justify-between w-full max-w-xl px-4 py-3">
         <div className="flex flex-col items-center">
-          <span className="text-gray-500 text-xs font-medium tracking-widest uppercase">점수</span>
-          <span className="text-cyan-400 text-2xl font-bold tabular-nums">{score}</span>
+          <span className="text-muted-foreground text-xs font-medium tracking-widest uppercase">점수</span>
+          <span className="text-cyan-600 dark:text-cyan-400 text-2xl font-bold tabular-nums">{score}</span>
         </div>
-        <div className="text-gray-600 text-lg font-bold tracking-wider">뱀 게임</div>
+        <div className="text-muted-foreground text-lg font-bold tracking-wider">뱀 게임</div>
         <div className="flex flex-col items-center">
-          <span className="text-gray-500 text-xs font-medium tracking-widest uppercase">최고</span>
-          <span className="text-indigo-400 text-2xl font-bold tabular-nums">{highScore}</span>
+          <span className="text-muted-foreground text-xs font-medium tracking-widest uppercase">최고</span>
+          <span className="text-indigo-600 dark:text-indigo-400 text-2xl font-bold tabular-nums">{highScore}</span>
         </div>
       </div>
 
@@ -355,21 +364,21 @@ export default function SnakeGame() {
       >
         <canvas
           ref={canvasRef}
-          className="rounded-lg border border-gray-800 shadow-2xl shadow-cyan-950/30"
+          className="rounded-lg border border-border shadow-2xl shadow-cyan-950/30"
         />
 
         {/* Menu overlay */}
         {gameState === "menu" && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/85 backdrop-blur-sm rounded-lg">
-            <div className="flex flex-col items-center gap-6 px-8 py-10 rounded-2xl border border-gray-800 bg-gray-900/80 shadow-2xl max-w-xs w-full mx-4">
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 dark:bg-gray-950/85 backdrop-blur-sm rounded-lg">
+            <div className="flex flex-col items-center gap-6 px-8 py-10 rounded-2xl border border-border bg-card dark:bg-gray-900/80 shadow-2xl max-w-xs w-full mx-4">
               <div className="text-6xl">🐍</div>
               <div className="text-center">
-                <h1 className="text-white text-3xl font-bold mb-2">뱀 게임</h1>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <h1 className="text-foreground text-3xl font-bold mb-2">뱀 게임</h1>
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   먹이를 먹고 최대한 길게 자라세요!
                 </p>
               </div>
-              <div className="text-gray-500 text-xs text-center space-y-1">
+              <div className="text-muted-foreground text-xs text-center space-y-1">
                 <p>방향키 / WASD 로 조작</p>
                 <p>모바일: 스와이프 또는 버튼</p>
               </div>
@@ -385,25 +394,25 @@ export default function SnakeGame() {
 
         {/* Game over overlay */}
         {gameState === "gameover" && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-950/85 backdrop-blur-sm rounded-lg">
-            <div className="flex flex-col items-center gap-6 px-8 py-10 rounded-2xl border border-gray-800 bg-gray-900/80 shadow-2xl max-w-xs w-full mx-4">
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 dark:bg-gray-950/85 backdrop-blur-sm rounded-lg">
+            <div className="flex flex-col items-center gap-6 px-8 py-10 rounded-2xl border border-border bg-card dark:bg-gray-900/80 shadow-2xl max-w-xs w-full mx-4">
               <div className="text-center">
-                <h1 className="text-red-400 text-3xl font-bold mb-1">GAME OVER</h1>
-                <p className="text-gray-500 text-sm">아쉽네요!</p>
+                <h1 className="text-red-600 dark:text-red-400 text-3xl font-bold mb-1">GAME OVER</h1>
+                <p className="text-muted-foreground text-sm">아쉽네요!</p>
               </div>
               <div className="flex gap-8">
                 <div className="flex flex-col items-center">
-                  <span className="text-gray-500 text-xs uppercase tracking-widest">점수</span>
-                  <span className="text-cyan-400 text-3xl font-bold tabular-nums">{score}</span>
+                  <span className="text-muted-foreground text-xs uppercase tracking-widest">점수</span>
+                  <span className="text-cyan-600 dark:text-cyan-400 text-3xl font-bold tabular-nums">{score}</span>
                 </div>
-                <div className="w-px bg-gray-700" />
+                <div className="w-px bg-border" />
                 <div className="flex flex-col items-center">
-                  <span className="text-gray-500 text-xs uppercase tracking-widest">최고</span>
-                  <span className="text-indigo-400 text-3xl font-bold tabular-nums">{highScore}</span>
+                  <span className="text-muted-foreground text-xs uppercase tracking-widest">최고</span>
+                  <span className="text-indigo-600 dark:text-indigo-400 text-3xl font-bold tabular-nums">{highScore}</span>
                 </div>
               </div>
               {score >= highScore && score > 0 && (
-                <div className="text-yellow-400 text-sm font-semibold">
+                <div className="text-yellow-600 dark:text-yellow-400 text-sm font-semibold">
                   새 최고 기록! 🎉
                 </div>
               )}
@@ -415,7 +424,7 @@ export default function SnakeGame() {
               </button>
               <button
                 onClick={resetGame}
-                className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors"
               >
                 메뉴로
               </button>
@@ -429,7 +438,7 @@ export default function SnakeGame() {
         <button
           onTouchStart={(e) => { e.stopPropagation(); handleDpad("UP"); }}
           onClick={() => handleDpad("UP")}
-          className="w-14 h-14 rounded-xl bg-gray-800 hover:bg-gray-700 active:bg-gray-600 flex items-center justify-center text-gray-300 text-xl transition-colors"
+          className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
           aria-label="위"
         >
           ▲
@@ -438,16 +447,16 @@ export default function SnakeGame() {
           <button
             onTouchStart={(e) => { e.stopPropagation(); handleDpad("LEFT"); }}
             onClick={() => handleDpad("LEFT")}
-            className="w-14 h-14 rounded-xl bg-gray-800 hover:bg-gray-700 active:bg-gray-600 flex items-center justify-center text-gray-300 text-xl transition-colors"
+            className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
             aria-label="왼쪽"
           >
             ◀
           </button>
-          <div className="w-14 h-14 rounded-xl bg-gray-900" />
+          <div className="w-14 h-14 rounded-xl bg-muted/50 dark:bg-gray-900" />
           <button
             onTouchStart={(e) => { e.stopPropagation(); handleDpad("RIGHT"); }}
             onClick={() => handleDpad("RIGHT")}
-            className="w-14 h-14 rounded-xl bg-gray-800 hover:bg-gray-700 active:bg-gray-600 flex items-center justify-center text-gray-300 text-xl transition-colors"
+            className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
             aria-label="오른쪽"
           >
             ▶
@@ -456,7 +465,7 @@ export default function SnakeGame() {
         <button
           onTouchStart={(e) => { e.stopPropagation(); handleDpad("DOWN"); }}
           onClick={() => handleDpad("DOWN")}
-          className="w-14 h-14 rounded-xl bg-gray-800 hover:bg-gray-700 active:bg-gray-600 flex items-center justify-center text-gray-300 text-xl transition-colors"
+          className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
           aria-label="아래"
         >
           ▼

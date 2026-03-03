@@ -23,8 +23,8 @@ export default function Leaderboard({
   const scores = scoresByGame[activeGame] ?? [];
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-      <h2 className="mb-4 text-lg font-semibold text-white">리더보드</h2>
+    <div className="rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm">
+      <h2 className="mb-4 text-lg font-semibold text-foreground">리더보드</h2>
 
       {/* Game Tabs */}
       <div className="mb-4 flex flex-wrap gap-2">
@@ -34,8 +34,8 @@ export default function Leaderboard({
             onClick={() => setActiveGame(game)}
             className={`rounded-lg px-3 py-1.5 text-xs font-medium border transition-all ${
               activeGame === game
-                ? "bg-cyan-500/20 border-cyan-500 text-cyan-300"
-                : "bg-gray-800 border-gray-600 text-gray-400 hover:border-gray-500"
+                ? "bg-cyan-500/20 border-cyan-500 text-cyan-700 dark:text-cyan-300"
+                : "bg-muted border-border text-muted-foreground hover:border-border"
             }`}
           >
             {GAME_SCORE_CONFIGS[game].label}
@@ -45,7 +45,7 @@ export default function Leaderboard({
 
       {/* Scores */}
       {scores.length === 0 ? (
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-muted-foreground">
           아직 기록이 없습니다. 첫 번째 기록을 남겨보세요!
         </p>
       ) : (
@@ -67,18 +67,18 @@ export default function Leaderboard({
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${
                   isCurrentUser
                     ? "bg-cyan-500/10 border border-cyan-500/20"
-                    : "hover:bg-white/5"
+                    : "hover:bg-muted/50"
                 }`}
               >
-                <span className="w-8 text-center text-sm font-bold text-gray-500">
+                <span className="w-8 text-center text-sm font-bold text-muted-foreground">
                   {medal ?? `${index + 1}`}
                 </span>
                 <span
-                  className={`flex-1 truncate text-sm ${isCurrentUser ? "font-semibold text-cyan-400" : "text-gray-300"}`}
+                  className={`flex-1 truncate text-sm ${isCurrentUser ? "font-semibold text-cyan-600 dark:text-cyan-400" : "text-foreground"}`}
                 >
                   {entry.player_name}
                 </span>
-                <span className="text-sm font-mono font-semibold text-white">
+                <span className="text-sm font-mono font-semibold text-foreground">
                   {config.formatScore(entry.score)}
                 </span>
               </div>

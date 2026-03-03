@@ -395,7 +395,7 @@ export default function Hero3D() {
   );
 
   return (
-    <div id="home" ref={container} className="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+    <div id="home" ref={container} className="bg-gradient-to-br from-background via-card to-background">
       <div className="pin-wrapper relative h-screen overflow-hidden">
         {/* 배경 그라디언트 */}
         <div className="pointer-events-none absolute inset-0">
@@ -407,41 +407,41 @@ export default function Hero3D() {
           <div className="container mx-auto flex flex-col items-center gap-6 px-6 lg:flex-row lg:gap-0">
             {/* 왼쪽: 히어로 텍스트 */}
             <div className="hero-text w-full shrink-0 space-y-4 lg:w-1/2 lg:space-y-6 lg:pr-8">
-              <p className="hero-subtitle text-sm font-semibold tracking-widest text-cyan-400 uppercase">
+              <p className="hero-subtitle text-sm font-semibold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase">
                 Full-Stack Developer
               </p>
-              <h1 className="hero-title text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-7xl">
+              <h1 className="hero-title text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-7xl">
                 이성재
                 <span className="mt-2 block bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-xl font-medium text-transparent sm:text-3xl lg:text-4xl">
                   Frontend &amp; Backend Developer
                 </span>
               </h1>
-              <p className="hero-desc max-w-md text-base leading-relaxed text-gray-400 sm:text-lg">
+              <p className="hero-desc max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
                 사용자 경험을 최우선으로 생각하는 풀스택 개발자입니다.
                 프론트엔드부터 백엔드까지, 완성도 높은 웹 서비스를 만듭니다.
               </p>
               <div className="hero-skills space-y-3">
                 <div className="flex flex-wrap gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400/70">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-cyan-600/70 dark:text-cyan-400/70">
                     Frontend
                   </span>
                   {frontendSkills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-sm text-cyan-300"
+                      className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-sm text-cyan-700 dark:text-cyan-300"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400/70">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600/70 dark:text-indigo-400/70">
                     Backend
                   </span>
                   {backendSkills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-sm text-indigo-300"
+                      className="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-sm text-indigo-600 dark:text-indigo-300"
                     >
                       {skill}
                     </span>
@@ -461,16 +461,16 @@ export default function Hero3D() {
 
             {/* AI 스킬 섹션 */}
             <div id="ai" className="ai-section pointer-events-none absolute inset-x-6 top-1/2 -translate-y-1/2 space-y-4 opacity-0 sm:space-y-6 lg:inset-x-auto lg:right-12 lg:w-[45%]">
-              <p className="text-sm font-semibold tracking-widest text-purple-400 uppercase">
+              <p className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">
                 AI-Driven Development
               </p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
                 AI Skills
                 <span className="mt-2 block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-xl font-medium text-transparent sm:text-2xl lg:text-3xl">
                   AI와 함께 개발하다
                 </span>
               </h2>
-              <p className="max-w-md text-base leading-relaxed text-gray-400 sm:text-lg">
+              <p className="max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Claude Code를 메인 개발 도구로 활용합니다.
                 CLAUDE.md로 프로젝트 컨텍스트를 체계적으로 설계하고,
                 MCP 서버를 연동하여 외부 도구와 데이터를 연결하며,
@@ -478,26 +478,26 @@ export default function Hero3D() {
               </p>
               <div className="space-y-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-purple-400/70">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-purple-600/70 dark:text-purple-400/70">
                     Main
                   </span>
                   {aiMainSkills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-sm text-purple-300"
+                      className="rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-sm text-purple-600 dark:text-purple-300"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-pink-400/70">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-pink-600/70 dark:text-pink-400/70">
                     Sub
                   </span>
                   {aiSubSkills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-sm text-pink-300"
+                      className="rounded-full border border-pink-500/30 bg-pink-500/10 px-3 py-1 text-sm text-pink-600 dark:text-pink-300"
                     >
                       {skill}
                     </span>
@@ -508,29 +508,29 @@ export default function Hero3D() {
 
             {/* Builder 섹션 */}
             <div id="builder" className="builder-section pointer-events-none absolute inset-x-6 top-1/2 -translate-y-1/2 space-y-4 opacity-0 sm:space-y-6 lg:inset-x-auto lg:right-12 lg:w-[45%]">
-              <p className="text-sm font-semibold tracking-widest text-amber-400 uppercase">
+              <p className="text-sm font-semibold tracking-widest text-amber-600 dark:text-amber-400 uppercase">
                 The New Role
               </p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
                 Builder
                 <span className="mt-2 block bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-xl font-medium text-transparent sm:text-2xl lg:text-3xl">
                   AI를 지휘하여 제품을 완성하다
                 </span>
               </h2>
-              <p className="max-w-md text-base leading-relaxed text-gray-400 sm:text-lg">
+              <p className="max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
                 코드를 직접 짜는 시대에서, 문제를 정의하고 AI를 오케스트레이션하여
                 제품을 끝까지 완성해내는 빌더의 시대로.
                 설계력과 프로덕트 센스로 AI 에이전트를 지휘합니다.
               </p>
               <div className="space-y-3">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-400/70">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-600/70 dark:text-amber-400/70">
                     Core
                   </span>
                   {builderSkills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-sm text-amber-300"
+                      className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-sm text-amber-600 dark:text-amber-300"
                     >
                       {skill}
                     </span>

@@ -35,15 +35,15 @@ export default async function AdminPage() {
 
   return (
     <div>
-      <h2 className="mb-6 text-xl font-bold text-white">대시보드</h2>
+      <h2 className="mb-6 text-xl font-bold text-foreground">대시보드</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+            className="rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm"
           >
-            <p className="text-sm text-gray-400">{stat.label}</p>
-            <p className="mt-2 text-3xl font-bold text-white">{stat.value}</p>
+            <p className="text-sm text-muted-foreground">{stat.label}</p>
+            <p className="mt-2 text-3xl font-bold text-foreground">{stat.value}</p>
           </div>
         ))}
       </div>

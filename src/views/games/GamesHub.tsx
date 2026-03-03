@@ -56,14 +56,14 @@ const games: GameItem[] = [
 
 export default function GamesHub() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-background via-card to-background pt-24 pb-16">
       <div className="container mx-auto px-6">
         <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-400 uppercase">
+          <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase">
             Mini Games
           </p>
-          <h1 className="text-4xl font-bold text-white sm:text-5xl">Games</h1>
-          <p className="mx-auto mt-4 max-w-lg text-gray-400">
+          <h1 className="text-4xl font-bold text-foreground sm:text-5xl">Games</h1>
+          <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
             간단한 브라우저 게임들을 즐겨보세요
           </p>
         </div>
@@ -74,7 +74,7 @@ export default function GamesHub() {
               {game.ready ? (
                 <Link
                   href={game.href}
-                  className={`group block rounded-2xl border bg-gradient-to-br p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-white/20 ${game.color}`}
+                  className={`group block rounded-2xl border bg-gradient-to-br p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-border ${game.color}`}
                 >
                   <GameCardContent game={game} />
                 </Link>
@@ -83,7 +83,7 @@ export default function GamesHub() {
                   className={`block rounded-2xl border bg-gradient-to-br p-6 opacity-50 backdrop-blur-sm ${game.color}`}
                 >
                   <GameCardContent game={game} />
-                  <span className="absolute top-4 right-4 rounded-full bg-gray-800 px-2.5 py-0.5 text-xs text-gray-400">
+                  <span className="absolute top-4 right-4 rounded-full bg-muted px-2.5 py-0.5 text-xs text-muted-foreground">
                     Coming Soon
                   </span>
                 </div>
@@ -100,8 +100,8 @@ function GameCardContent({ game }: { game: GameItem }) {
   return (
     <>
       <div className="mb-4 text-4xl">{game.emoji}</div>
-      <h2 className="mb-2 text-xl font-bold text-white">{game.title}</h2>
-      <p className="text-sm text-gray-400">{game.description}</p>
+      <h2 className="mb-2 text-xl font-bold text-foreground">{game.title}</h2>
+      <p className="text-sm text-muted-foreground">{game.description}</p>
     </>
   );
 }

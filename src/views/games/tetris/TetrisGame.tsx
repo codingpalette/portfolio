@@ -19,21 +19,21 @@ const CELL_SIZE = 32; // px, used for inline styles fallback
 function BoardCell({ type, ghost }: { type: Cell | "ghost"; ghost?: boolean }) {
   if (!type) {
     return (
-      <div className="border border-white/5 bg-gray-900/50" />
+      <div className="border border-border bg-card/50 dark:bg-gray-900/50" />
     );
   }
   if (type === "ghost") {
     return (
       <div
-        className="border border-white/20 bg-transparent"
-        style={{ boxShadow: "inset 0 0 0 2px rgba(255,255,255,0.15)" }}
+        className="border border-border bg-transparent"
+        style={{ boxShadow: "inset 0 0 0 2px rgba(128,128,128,0.15)" }}
       />
     );
   }
   const color = PIECE_COLORS[type as TetrominoType];
   return (
     <div
-      className="border border-white/10"
+      className="border border-border/30"
       style={{
         backgroundColor: color,
         boxShadow: `inset 0 0 0 2px rgba(255,255,255,0.2), 0 0 6px ${color}66`,
@@ -119,7 +119,7 @@ function Board() {
 
   return (
     <div
-      className="relative border border-white/10 bg-gray-900"
+      className="relative border border-border bg-card dark:bg-gray-900"
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${BOARD_WIDTH}, ${CELL_SIZE}px)`,
@@ -149,8 +149,8 @@ function SidePanel() {
   return (
     <div className="flex w-36 flex-col gap-3">
       {/* Hold */}
-      <div className="rounded-lg border border-white/10 bg-gray-900/80 p-3">
-        <p className="mb-2 text-xs font-semibold tracking-widest text-gray-400">
+      <div className="rounded-lg border border-border bg-card dark:bg-gray-900/80 p-3">
+        <p className="mb-2 text-xs font-semibold tracking-widest text-muted-foreground">
           HOLD
         </p>
         <div className={`flex min-h-[52px] items-center justify-center transition-opacity ${canHold ? "opacity-100" : "opacity-40"}`}>
@@ -159,8 +159,8 @@ function SidePanel() {
       </div>
 
       {/* Next */}
-      <div className="rounded-lg border border-white/10 bg-gray-900/80 p-3">
-        <p className="mb-2 text-xs font-semibold tracking-widest text-gray-400">
+      <div className="rounded-lg border border-border bg-card dark:bg-gray-900/80 p-3">
+        <p className="mb-2 text-xs font-semibold tracking-widest text-muted-foreground">
           NEXT
         </p>
         <div className="flex min-h-[52px] items-center justify-center">
@@ -169,29 +169,29 @@ function SidePanel() {
       </div>
 
       {/* Stats */}
-      <div className="rounded-lg border border-white/10 bg-gray-900/80 p-3 space-y-3">
+      <div className="rounded-lg border border-border bg-card dark:bg-gray-900/80 p-3 space-y-3">
         <div>
-          <p className="text-xs font-semibold tracking-widest text-gray-400">SCORE</p>
-          <p className="text-lg font-bold text-cyan-400">{score.toLocaleString()}</p>
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground">SCORE</p>
+          <p className="text-lg font-bold text-cyan-600 dark:text-cyan-400">{score.toLocaleString()}</p>
         </div>
         <div>
-          <p className="text-xs font-semibold tracking-widest text-gray-400">BEST</p>
-          <p className="text-sm font-bold text-indigo-400">{highScore.toLocaleString()}</p>
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground">BEST</p>
+          <p className="text-sm font-bold text-indigo-600 dark:text-indigo-400">{highScore.toLocaleString()}</p>
         </div>
         <div>
-          <p className="text-xs font-semibold tracking-widest text-gray-400">LEVEL</p>
-          <p className="text-lg font-bold text-white">{level}</p>
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground">LEVEL</p>
+          <p className="text-lg font-bold text-foreground">{level}</p>
         </div>
         <div>
-          <p className="text-xs font-semibold tracking-widest text-gray-400">LINES</p>
-          <p className="text-lg font-bold text-white">{lines}</p>
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground">LINES</p>
+          <p className="text-lg font-bold text-foreground">{lines}</p>
         </div>
       </div>
 
       {/* Controls hint */}
-      <div className="rounded-lg border border-white/5 bg-gray-900/40 p-3">
-        <p className="mb-1.5 text-xs font-semibold tracking-widest text-gray-500">KEYS</p>
-        <div className="space-y-0.5 text-xs text-gray-500">
+      <div className="rounded-lg border border-border bg-card/40 dark:bg-gray-900/40 p-3">
+        <p className="mb-1.5 text-xs font-semibold tracking-widest text-muted-foreground">KEYS</p>
+        <div className="space-y-0.5 text-xs text-muted-foreground">
           <p>← → 이동</p>
           <p>↓ 소프트</p>
           <p>↑ / X 회전</p>
@@ -218,7 +218,7 @@ function MobileControls() {
   if (gameState !== "playing") return null;
 
   const btnClass =
-    "flex h-14 w-14 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-xl text-white backdrop-blur-sm active:bg-white/25 select-none touch-none";
+    "flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-muted/50 dark:bg-white/10 text-xl text-foreground backdrop-blur-sm active:bg-white/25 select-none touch-none";
 
   return (
     <div className="pointer-events-auto absolute bottom-4 left-0 right-0 flex items-end justify-center gap-3 sm:hidden px-4">
@@ -288,13 +288,13 @@ function MenuOverlay() {
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="text-center px-6">
-        <h1 className="mb-2 text-5xl font-bold tracking-tight text-white">
-          <span className="text-cyan-400">테트</span>
-          <span className="text-indigo-400">리스</span>
+        <h1 className="mb-2 text-5xl font-bold tracking-tight text-foreground">
+          <span className="text-cyan-600 dark:text-cyan-400">테트</span>
+          <span className="text-indigo-600 dark:text-indigo-400">리스</span>
         </h1>
-        <p className="mb-6 text-gray-400">블록을 쌓아 줄을 완성하세요</p>
+        <p className="mb-6 text-muted-foreground">블록을 쌓아 줄을 완성하세요</p>
         {highScore > 0 && (
-          <p className="mb-4 text-sm text-indigo-400">
+          <p className="mb-4 text-sm text-indigo-600 dark:text-indigo-400">
             최고 점수: {highScore.toLocaleString()}
           </p>
         )}
@@ -304,7 +304,7 @@ function MenuOverlay() {
         >
           게임 시작
         </button>
-        <p className="mt-4 text-xs text-gray-500">
+        <p className="mt-4 text-xs text-muted-foreground">
           SPACE 또는 ENTER로 시작
         </p>
       </div>
@@ -341,16 +341,16 @@ function GameOverOverlay() {
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="text-center px-6">
-        <h2 className="mb-2 text-4xl font-bold text-red-400">게임 오버</h2>
-        <p className="mb-1 text-2xl font-bold text-white">
+        <h2 className="mb-2 text-4xl font-bold text-red-600 dark:text-red-400">게임 오버</h2>
+        <p className="mb-1 text-2xl font-bold text-foreground">
           {score.toLocaleString()} 점
         </p>
         {isNewRecord && (
-          <p className="mb-3 text-sm font-semibold text-yellow-400">
+          <p className="mb-3 text-sm font-semibold text-yellow-600 dark:text-yellow-400">
             신기록 달성!
           </p>
         )}
-        <p className="mb-6 text-sm text-gray-400">
+        <p className="mb-6 text-sm text-muted-foreground">
           최고 점수: {highScore.toLocaleString()}
         </p>
         <button
@@ -359,7 +359,7 @@ function GameOverOverlay() {
         >
           다시 시작
         </button>
-        <p className="mt-3 text-xs text-gray-500">SPACE로 재시작</p>
+        <p className="mt-3 text-xs text-muted-foreground">SPACE로 재시작</p>
       </div>
     </div>
   );
@@ -497,7 +497,7 @@ export default function TetrisGame() {
   }, [gameState, score, lines, level, submitScore, resetSubmission]);
 
   return (
-    <div className="relative h-[calc(100vh-60px)] mt-[60px] w-full bg-gray-950 flex items-center justify-center overflow-hidden">
+    <div className="relative h-[calc(100vh-60px)] mt-[60px] w-full bg-background flex items-center justify-center overflow-hidden">
       <GameLoop />
       <KeyboardHandler />
 

@@ -12,11 +12,11 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-gray-950 pt-20">
+    <div className="min-h-screen bg-background pt-20">
       <div className="container mx-auto px-6 py-8">
         <div className="mb-8 flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-white">관리자</h1>
-          <span className="rounded bg-cyan-500/20 px-2 py-0.5 text-xs text-cyan-400">
+          <h1 className="text-2xl font-bold text-foreground">관리자</h1>
+          <span className="rounded bg-cyan-500/20 px-2 py-0.5 text-xs text-cyan-600 dark:text-cyan-400">
             Admin
           </span>
         </div>
@@ -29,7 +29,7 @@ export default function AdminLayout({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="block rounded-lg px-4 py-2.5 text-sm text-gray-400 transition-colors hover:bg-white/5 hover:text-white"
+                    className="block rounded-lg px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   >
                     {link.label}
                   </Link>

@@ -17,6 +17,7 @@ export default function GuestbookForm() {
   const [content, setContent] = useState<Record<string, unknown>[]>(
     createEmptyContent(),
   );
+  const [editorKey, setEditorKey] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,12 +33,12 @@ export default function GuestbookForm() {
 
   if (!user) {
     return (
-      <div className="rounded-xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm">
-        <p className="text-sm text-gray-400">
+      <div className="rounded-xl border border-border bg-card/50 p-6 text-center backdrop-blur-sm">
+        <p className="text-sm text-muted-foreground">
           방명록을 작성하려면{" "}
           <a
             href="/login"
-            className="text-cyan-400 transition-colors hover:text-cyan-300"
+            className="text-cyan-600 dark:text-cyan-400 transition-colors hover:text-cyan-700 dark:hover:text-cyan-300"
           >
             로그인
           </a>
@@ -73,6 +74,7 @@ export default function GuestbookForm() {
     }
 
     setContent(createEmptyContent());
+    setEditorKey((k) => k + 1);
     setSubmitting(false);
     router.refresh();
   };
@@ -80,15 +82,16 @@ export default function GuestbookForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+      className="rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm"
     >
       {error && (
-        <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-300">
           {error}
         </div>
       )}
       <div className="mb-3">
         <PlateEditor
+          key={editorKey}
           plugins={GUESTBOOK_PLUGINS}
           initialValue={content}
           onChange={handleContentChange}
@@ -98,7 +101,7 @@ export default function GuestbookForm() {
       </div>
       <div className="flex items-center justify-between">
         <span
-          className={`text-xs ${charCount > 500 ? "text-red-400" : "text-gray-500"}`}
+          className={`text-xs ${charCount > 500 ? "text-red-600 dark:text-red-400" : "text-muted-foreground"}`}
         >
           {charCount}/500
         </span>

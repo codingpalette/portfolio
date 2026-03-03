@@ -61,14 +61,14 @@ export default function DashboardView({
 
   if (!user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-950">
+      <div className="flex min-h-screen items-center justify-center bg-background">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 px-4 pt-28 pb-16">
+    <div className="relative min-h-screen bg-gradient-to-br from-background via-card to-background px-4 pt-28 pb-16">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/4 -left-32 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
         <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
@@ -87,34 +87,34 @@ export default function DashboardView({
                 className="h-full w-full object-cover"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center bg-gray-800 text-xl font-bold text-cyan-400/60">
+              <div className="flex h-full w-full items-center justify-center bg-muted text-xl font-bold text-cyan-600/60 dark:text-cyan-400/60">
                 {user.profile.name?.[0]?.toUpperCase() ?? "?"}
               </div>
             )}
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-white">
+            <h1 className="text-2xl font-bold text-foreground">
               안녕하세요, {user.profile.name || "사용자"}님
             </h1>
-            <p className="text-sm text-gray-400">{user.email}</p>
+            <p className="text-sm text-muted-foreground">{user.email}</p>
           </div>
         </div>
 
         {/* 계정 정보 */}
-        <div className="mb-8 rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-          <h2 className="mb-4 text-lg font-semibold text-white">계정 정보</h2>
+        <div className="mb-8 rounded-xl border border-border bg-card/50 p-6 backdrop-blur-sm">
+          <h2 className="mb-4 text-lg font-semibold text-foreground">계정 정보</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <p className="text-xs text-gray-500">이름</p>
-              <p className="text-sm text-gray-300">{user.profile.name || "-"}</p>
+              <p className="text-xs text-muted-foreground">이름</p>
+              <p className="text-sm text-foreground">{user.profile.name || "-"}</p>
             </div>
             <div>
-              <p className="text-xs text-gray-500">권한</p>
+              <p className="text-xs text-muted-foreground">권한</p>
               <span
                 className={`inline-block rounded px-2 py-0.5 text-xs font-medium ${
                   user.profile.role === "admin"
-                    ? "bg-cyan-500/20 text-cyan-400"
-                    : "bg-gray-700/50 text-gray-400"
+                    ? "bg-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+                    : "bg-muted/50 text-muted-foreground"
                 }`}
               >
                 {user.profile.role === "admin" ? "Admin" : "User"}
@@ -124,15 +124,15 @@ export default function DashboardView({
         </div>
 
         {/* 탭 */}
-        <div className="mb-6 flex gap-2 border-b border-white/10 pb-3">
+        <div className="mb-6 flex gap-2 border-b border-border pb-3">
           {TABS.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                 activeTab === tab.key
-                  ? "bg-cyan-500/20 text-cyan-300"
-                  : "text-gray-400 hover:bg-white/5 hover:text-gray-300"
+                  ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >
               {tab.label}
@@ -147,14 +147,14 @@ export default function DashboardView({
               <Link
                 key={link.href}
                 href={link.href}
-                className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+                className="group flex items-center gap-4 rounded-xl border border-border bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-border hover:bg-card"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 transition-colors group-hover:bg-cyan-500/20">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 transition-colors group-hover:bg-cyan-500/20">
                   {link.icon}
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-white">{link.label}</p>
-                  <p className="text-xs text-gray-500">{link.description}</p>
+                  <p className="text-sm font-medium text-foreground">{link.label}</p>
+                  <p className="text-xs text-muted-foreground">{link.description}</p>
                 </div>
               </Link>
             ))}
@@ -163,13 +163,13 @@ export default function DashboardView({
 
         {activeTab === "stats" && (
           gameStatsSlot ?? (
-            <p className="text-sm text-gray-500">로그인 후 게임을 플레이하면 통계가 표시됩니다.</p>
+            <p className="text-sm text-muted-foreground">로그인 후 게임을 플레이하면 통계가 표시됩니다.</p>
           )
         )}
 
         {activeTab === "leaderboard" && (
           leaderboardSlot ?? (
-            <p className="text-sm text-gray-500">아직 기록이 없습니다.</p>
+            <p className="text-sm text-muted-foreground">아직 기록이 없습니다.</p>
           )
         )}
       </div>
