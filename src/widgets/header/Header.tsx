@@ -46,11 +46,10 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 shadow-[0_1px_0_rgba(128,128,128,0.1)] backdrop-blur-lg"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${scrolled
+        ? "bg-background/80 shadow-[0_1px_0_rgba(128,128,128,0.1)] backdrop-blur-lg"
+        : "bg-transparent"
+        }`}
     >
       <nav className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* 로고 */}
@@ -159,19 +158,16 @@ export default function Header() {
             aria-label="메뉴 토글"
           >
             <span
-              className={`h-0.5 w-6 bg-foreground transition-all duration-300 ${
-                menuOpen ? "translate-y-2 rotate-45" : ""
-              }`}
+              className={`h-0.5 w-6 bg-foreground transition-all duration-300 ${menuOpen ? "translate-y-2 rotate-45" : ""
+                }`}
             />
             <span
-              className={`h-0.5 w-6 bg-foreground transition-all duration-300 ${
-                menuOpen ? "opacity-0" : ""
-              }`}
+              className={`h-0.5 w-6 bg-foreground transition-all duration-300 ${menuOpen ? "opacity-0" : ""
+                }`}
             />
             <span
-              className={`h-0.5 w-6 bg-foreground transition-all duration-300 ${
-                menuOpen ? "-translate-y-2 -rotate-45" : ""
-              }`}
+              className={`h-0.5 w-6 bg-foreground transition-all duration-300 ${menuOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
             />
           </button>
         </div>
@@ -179,9 +175,8 @@ export default function Header() {
 
       {/* 모바일 메뉴 */}
       <div
-        className={`overflow-hidden border-t border-border bg-background/95 backdrop-blur-lg transition-all duration-300 md:hidden ${
-          menuOpen ? "max-h-60" : "max-h-0 border-t-0"
-        }`}
+        className={`overflow-hidden border-t border-border bg-background/95 backdrop-blur-lg transition-all duration-300 md:hidden ${menuOpen ? "max-h-60" : "max-h-0 border-t-0"
+          }`}
       >
         <ul className="container mx-auto flex flex-col gap-1 px-6 py-4">
           {navLinks.map((link) => (
@@ -195,61 +190,6 @@ export default function Header() {
               </Link>
             </li>
           ))}
-          {!isLoading && !user && (
-            <li>
-              <Link
-                href="/login"
-                onClick={() => setMenuOpen(false)}
-                className="block rounded-lg px-4 py-3 text-sm text-cyan-400 transition-colors hover:bg-accent"
-              >
-                로그인
-              </Link>
-            </li>
-          )}
-          {!isLoading && user && (
-            <>
-              <li>
-                <Link
-                  href="/profile"
-                  onClick={() => setMenuOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                >
-                  프로필 수정
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard"
-                  onClick={() => setMenuOpen(false)}
-                  className="block rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                >
-                  대시보드
-                </Link>
-              </li>
-              {user.profile.role === "admin" && (
-                <li>
-                  <Link
-                    href="/admin"
-                    onClick={() => setMenuOpen(false)}
-                    className="block rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                  >
-                    관리자
-                  </Link>
-                </li>
-              )}
-              <li>
-                <button
-                  onClick={() => {
-                    setMenuOpen(false);
-                    handleLogout();
-                  }}
-                  className="block w-full rounded-lg px-4 py-3 text-left text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-red-400"
-                >
-                  로그아웃
-                </button>
-              </li>
-            </>
-          )}
         </ul>
       </div>
     </header>
