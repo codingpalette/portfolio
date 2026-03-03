@@ -5,6 +5,11 @@ import { useRouter } from "next/navigation";
 import type { GuestbookEntry } from "@entities/guestbook";
 import { useAuthStore } from "@features/auth";
 import { createClient } from "@shared/api/supabase/client";
+import dynamic from "next/dynamic";
+const PlateEditor = dynamic(() => import("@shared/ui/plate-editor"), {
+  ssr: false,
+});
+import { GUESTBOOK_PLUGINS } from "@shared/lib/plate-presets";
 
 interface GuestbookListProps {
   entries: GuestbookEntry[];
@@ -94,9 +99,13 @@ export default function GuestbookList({ entries }: GuestbookListProps) {
               </button>
             )}
           </div>
-          <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-300">
-            {entry.message}
-          </p>
+          <div className="text-sm leading-relaxed text-gray-300">
+            <PlateEditor
+              plugins={GUESTBOOK_PLUGINS}
+              initialValue={entry.content}
+              readOnly
+            />
+          </div>
         </div>
       ))}
     </div>

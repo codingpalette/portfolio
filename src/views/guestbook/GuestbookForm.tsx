@@ -1,16 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@features/auth";
 import { createClient } from "@shared/api/supabase/client";
+import dynamic from "next/dynamic";
+const PlateEditor = dynamic(() => import("@shared/ui/plate-editor"), {
+  ssr: false,
+});
+import { GUESTBOOK_PLUGINS } from "@shared/lib/plate-presets";
+import { createEmptyContent, extractPlainText } from "@shared/lib/plate-utils";
 
 export default function GuestbookForm() {
   const { user } = useAuthStore();
   const router = useRouter();
-  const [message, setMessage] = useState("");
+  const [content, setContent] = useState<Record<string, unknown>[]>(
+    createEmptyContent(),
+  );
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const plainText = extractPlainText(content as never[]);
+  const charCount = plainText.length;
+
+  const handleContentChange = useCallback(
+    (value: Record<string, unknown>[]) => {
+      setContent(value);
+    },
+    [],
+  );
 
   if (!user) {
     return (
@@ -31,8 +49,8 @@ export default function GuestbookForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const trimmed = message.trim();
-    if (!trimmed) return;
+    if (!plainText.trim()) return;
+    if (charCount > 500) return;
 
     setSubmitting(true);
     setError(null);
@@ -45,7 +63,7 @@ export default function GuestbookForm() {
       .insert({
         user_id: user.id,
         author_name: authorName,
-        message: trimmed,
+        content,
       });
 
     if (insertError) {
@@ -54,7 +72,7 @@ export default function GuestbookForm() {
       return;
     }
 
-    setMessage("");
+    setContent(createEmptyContent());
     setSubmitting(false);
     router.refresh();
   };
@@ -69,20 +87,24 @@ export default function GuestbookForm() {
           {error}
         </div>
       )}
-      <textarea
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="메시지를 남겨주세요..."
-        maxLength={500}
-        rows={3}
-        required
-        className="mb-3 w-full resize-none rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-gray-500 outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
-      />
+      <div className="mb-3">
+        <PlateEditor
+          plugins={GUESTBOOK_PLUGINS}
+          initialValue={content}
+          onChange={handleContentChange}
+          placeholder="메시지를 남겨주세요..."
+          variant="guestbook"
+        />
+      </div>
       <div className="flex items-center justify-between">
-        <span className="text-xs text-gray-500">{message.length}/500</span>
+        <span
+          className={`text-xs ${charCount > 500 ? "text-red-400" : "text-gray-500"}`}
+        >
+          {charCount}/500
+        </span>
         <button
           type="submit"
-          disabled={submitting || !message.trim()}
+          disabled={submitting || !plainText.trim() || charCount > 500}
           className="rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-500 px-5 py-2 text-sm font-medium text-white transition-all hover:from-cyan-400 hover:to-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting ? "작성 중..." : "작성"}

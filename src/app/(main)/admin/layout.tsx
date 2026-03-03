@@ -3,6 +3,7 @@ import Link from "next/link";
 const adminNavLinks = [
   { label: "대시보드", href: "/admin" },
   { label: "프로젝트 관리", href: "/admin/projects" },
+  { label: "블로그 관리", href: "/admin/blog" },
 ];
 
 export default function AdminLayout({
