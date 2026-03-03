@@ -340,7 +340,7 @@ export default function Hero3D() {
       </div>
 
       {/* 섹션 1: Hero */}
-      <section className="relative flex min-h-screen items-center py-20">
+      <section className="relative flex min-h-screen items-center pt-24 pb-20">
         <div className="container mx-auto flex flex-col items-center gap-6 px-6 lg:flex-row lg:gap-0">
           {/* 왼쪽: 히어로 텍스트 */}
           <div className="hero-text w-full space-y-4 lg:w-1/2 lg:space-y-6 lg:pr-8">
@@ -404,7 +404,7 @@ export default function Hero3D() {
           <div className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-purple-500/10 blur-3xl" />
           <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-pink-500/10 blur-3xl" />
         </div>
-        <div className="container relative z-10 mx-auto flex flex-col items-center gap-8 px-6 lg:flex-row lg:gap-12">
+        <div className="container relative z-10 mx-auto flex flex-col-reverse items-center gap-8 px-6 lg:flex-row lg:gap-12">
           {/* 3D 캔버스 */}
           <div className="w-full lg:w-1/2">
             <div className="mx-auto aspect-square max-w-[250px] sm:max-w-xs lg:max-w-sm">
@@ -468,7 +468,7 @@ export default function Hero3D() {
           <div className="absolute top-1/4 -left-32 h-80 w-80 rounded-full bg-amber-500/10 blur-3xl" />
           <div className="absolute -right-32 bottom-1/4 h-80 w-80 rounded-full bg-orange-500/10 blur-3xl" />
         </div>
-        <div className="container relative z-10 mx-auto flex flex-col-reverse items-center gap-8 px-6 lg:flex-row lg:gap-12">
+        <div className="container relative z-10 mx-auto flex flex-col items-center gap-8 px-6 lg:flex-row lg:gap-12">
           {/* 텍스트 */}
           <div className="w-full space-y-4 sm:space-y-6 lg:w-1/2">
             <p className="text-sm font-semibold tracking-widest text-amber-600 dark:text-amber-400 uppercase">
