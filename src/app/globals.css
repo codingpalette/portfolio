@@ -122,6 +122,7 @@
   }
   html {
     background-color: var(--background);
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground;
