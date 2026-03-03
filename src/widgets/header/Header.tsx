@@ -7,7 +7,7 @@ import { ThemeToggle } from "@shared/ui/theme-toggle";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Blog", href: "/blog" },
+  // { label: "Blog", href: "/blog" },
   { label: "Guestbook", href: "/guestbook" },
   { label: "Games", href: "/games" },
 ];
