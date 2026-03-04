@@ -17,6 +17,14 @@ export default function ProfileForm() {
     type: "success" | "error";
     text: string;
   } | null>(null);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [passwordMessage, setPasswordMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -92,6 +100,69 @@ export default function ProfileForm() {
     await initialize();
     setMessage({ type: "success", text: "프로필이 수정되었습니다" });
     setSaving(false);
+  };
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+
+    if (newPassword.length < 6) {
+      setPasswordMessage({
+        type: "error",
+        text: "새 비밀번호는 6자 이상이어야 합니다",
+      });
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setPasswordMessage({
+        type: "error",
+        text: "새 비밀번호가 일치하지 않습니다",
+      });
+      return;
+    }
+
+    setChangingPassword(true);
+    setPasswordMessage(null);
+
+    const supabase = createClient();
+
+    // 현재 비밀번호로 재인증
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email: user.email,
+      password: currentPassword,
+    });
+
+    if (signInError) {
+      setPasswordMessage({
+        type: "error",
+        text: "현재 비밀번호가 올바르지 않습니다",
+      });
+      setChangingPassword(false);
+      return;
+    }
+
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      setPasswordMessage({
+        type: "error",
+        text: "비밀번호 변경에 실패했습니다",
+      });
+      setChangingPassword(false);
+      return;
+    }
+
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setPasswordMessage({
+      type: "success",
+      text: "비밀번호가 변경되었습니다",
+    });
+    setChangingPassword(false);
   };
 
   if (!user) {
@@ -255,6 +326,89 @@ export default function ProfileForm() {
               className="w-full rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-500 px-4 py-2.5 text-sm font-medium text-white transition-all hover:from-cyan-400 hover:to-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {saving ? "저장 중..." : "저장"}
+            </button>
+          </form>
+
+          <hr className="my-6 border-border" />
+
+          <form onSubmit={handlePasswordChange} className="space-y-5">
+            <div className="text-center">
+              <h2 className="text-lg font-bold text-foreground">
+                비밀번호 변경
+              </h2>
+            </div>
+
+            {passwordMessage && (
+              <div
+                className={`rounded-lg border px-4 py-3 text-sm ${
+                  passwordMessage.type === "success"
+                    ? "border-green-500/30 bg-green-500/10 text-green-700 dark:text-green-300"
+                    : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-300"
+                }`}
+              >
+                {passwordMessage.text}
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <label
+                htmlFor="currentPassword"
+                className="block text-sm font-medium text-foreground"
+              >
+                현재 비밀번호
+              </label>
+              <input
+                id="currentPassword"
+                type="password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                required
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="newPassword"
+                className="block text-sm font-medium text-foreground"
+              >
+                새 비밀번호
+              </label>
+              <input
+                id="newPassword"
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="6자 이상"
+                required
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-foreground"
+              >
+                새 비밀번호 확인
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="새 비밀번호 재입력"
+                required
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={changingPassword}
+              className="w-full rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-500 px-4 py-2.5 text-sm font-medium text-white transition-all hover:from-cyan-400 hover:to-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {changingPassword ? "변경 중..." : "비밀번호 변경"}
             </button>
           </form>
         </div>
