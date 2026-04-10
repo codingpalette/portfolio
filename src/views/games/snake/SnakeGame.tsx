@@ -436,8 +436,7 @@ export default function SnakeGame() {
       {/* Mobile D-pad */}
       <div className="flex flex-col items-center gap-1 pb-4 touch-manipulation md:hidden">
         <button
-          onTouchStart={(e) => { e.stopPropagation(); handleDpad("UP"); }}
-          onClick={() => handleDpad("UP")}
+          onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); handleDpad("UP"); }}
           className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
           aria-label="위"
         >
@@ -445,8 +444,7 @@ export default function SnakeGame() {
         </button>
         <div className="flex gap-1">
           <button
-            onTouchStart={(e) => { e.stopPropagation(); handleDpad("LEFT"); }}
-            onClick={() => handleDpad("LEFT")}
+            onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); handleDpad("LEFT"); }}
             className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
             aria-label="왼쪽"
           >
@@ -454,8 +452,7 @@ export default function SnakeGame() {
           </button>
           <div className="w-14 h-14 rounded-xl bg-muted/50 dark:bg-gray-900" />
           <button
-            onTouchStart={(e) => { e.stopPropagation(); handleDpad("RIGHT"); }}
-            onClick={() => handleDpad("RIGHT")}
+            onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); handleDpad("RIGHT"); }}
             className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
             aria-label="오른쪽"
           >
@@ -463,8 +460,7 @@ export default function SnakeGame() {
           </button>
         </div>
         <button
-          onTouchStart={(e) => { e.stopPropagation(); handleDpad("DOWN"); }}
-          onClick={() => handleDpad("DOWN")}
+          onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); handleDpad("DOWN"); }}
           className="w-14 h-14 rounded-xl bg-muted dark:bg-gray-800 hover:bg-accent dark:hover:bg-gray-700 active:bg-accent/70 dark:active:bg-gray-600 flex items-center justify-center text-foreground text-xl transition-colors"
           aria-label="아래"
         >

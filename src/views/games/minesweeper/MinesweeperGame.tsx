@@ -43,6 +43,8 @@ function CellView({
   onFlag: (r: number, c: number) => void;
 }) {
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // 롱프레스 후 click 이벤트 방지용 플래그
+  const longPressFiredRef = useRef(false);
 
   const handleContextMenu = useCallback(
     (e: React.MouseEvent) => {
@@ -53,7 +55,9 @@ function CellView({
   );
 
   const handleTouchStart = useCallback(() => {
+    longPressFiredRef.current = false;
     longPressTimer.current = setTimeout(() => {
+      longPressFiredRef.current = true;
       onFlag(row, col);
     }, 500);
   }, [row, col, onFlag]);
@@ -66,6 +70,11 @@ function CellView({
   }, []);
 
   const handleClick = useCallback(() => {
+    // 롱프레스로 깃발을 꽂은 직후 click 이벤트 무시
+    if (longPressFiredRef.current) {
+      longPressFiredRef.current = false;
+      return;
+    }
     onReveal(row, col);
   }, [row, col, onReveal]);
 
@@ -95,7 +104,14 @@ function CellView({
     return (
       <button
         className="flex items-center justify-center w-full h-full bg-muted dark:bg-gray-700 border-t-2 border-l-2 border-border border-b-2 border-r-2 border-b-border border-r-border text-base select-none rounded-sm cursor-pointer active:scale-95"
-        onClick={handleContextMenu}
+        onClick={(e) => {
+          // 롱프레스 직후 click 이벤트 무시
+          if (longPressFiredRef.current) {
+            longPressFiredRef.current = false;
+            return;
+          }
+          handleContextMenu(e);
+        }}
         onContextMenu={handleContextMenu}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
