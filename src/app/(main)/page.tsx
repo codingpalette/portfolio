@@ -1,6 +1,7 @@
 import { HeroTypographic } from "@widgets/hero";
 import { StatsSection } from "@widgets/stats";
 import { StackSection } from "@widgets/stack";
+import { ActivitySection } from "@widgets/activity";
 import { ProjectGallery } from "@widgets/projects";
 import { ExperienceSection } from "@widgets/experience";
 import { ContactSection } from "@widgets/contact";
@@ -23,6 +24,7 @@ export default async function Home() {
       <HeroTypographic />
       <StatsSection />
       <StackSection />
+      <ActivitySection />
       <ProjectGallery projects={(data as Project[]) ?? []} />
       <ExperienceSection />
       <ContactSection />

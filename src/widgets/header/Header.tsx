@@ -9,6 +9,7 @@ import { HeaderClock } from "./HeaderClock";
 
 const navLinks = [
   { label: "Stack", href: "/#stack" },
+  { label: "Activity", href: "/#activity" },
   { label: "Projects", href: "/#projects" },
   { label: "Experience", href: "/#experience" },
   { label: "Contact", href: "/#contact" },
