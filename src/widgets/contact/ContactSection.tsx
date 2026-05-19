@@ -11,10 +11,10 @@ export default function ContactSection() {
 
         <div className="flex flex-wrap items-center gap-3">
           <a
-            href="mailto:msbfms@gmail.com"
+            href="mailto:adfffewr@naver.com"
             className="inline-flex h-12 items-center rounded-md bg-[var(--accent)] px-6 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
           >
-            msbfms@gmail.com ↗
+            adfffewr@naver.com ↗
           </a>
           <a
             href="https://github.com/codingpalette"

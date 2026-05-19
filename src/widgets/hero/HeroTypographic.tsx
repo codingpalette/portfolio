@@ -29,7 +29,7 @@ export default function HeroTypographic() {
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <a
-            href="mailto:msbfms@gmail.com"
+            href="mailto:adfffewr@naver.com"
             className="inline-flex h-10 items-center rounded-md bg-[var(--accent)] px-5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
           >
             Get in touch →
@@ -44,7 +44,7 @@ export default function HeroTypographic() {
 
         <div className="mt-12 border-t border-border pt-6">
           <p className="font-mono text-xs text-muted-foreground">
-            msbfms@gmail.com · Incheon, KR · Available for opportunities
+            adfffewr@naver.com · Incheon, KR · Available for opportunities
           </p>
         </div>
       </div>

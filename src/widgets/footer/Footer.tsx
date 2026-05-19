@@ -24,10 +24,10 @@ export default function Footer() {
           <ul className="mt-3 flex flex-col gap-1 text-sm">
             <li>
               <a
-                href="mailto:msbfms@gmail.com"
+                href="mailto:adfffewr@naver.com"
                 className="text-foreground underline underline-offset-4 transition-colors hover:text-[var(--accent)]"
               >
-                msbfms@gmail.com
+                adfffewr@naver.com
               </a>
             </li>
             <li>
