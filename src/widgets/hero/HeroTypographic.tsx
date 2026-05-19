@@ -8,14 +8,14 @@ export default function HeroTypographic() {
           ─ INTRODUCTION
         </p>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
-          Full-Stack Developer.
+          Frontend Developer.
           <br />
           <span className="text-muted-foreground">
-            3D 인터랙티브 웹과 견고한 백엔드를
+            프론트엔드를 중심으로,
           </span>
           <br />
           <span className="text-muted-foreground">
-            이어주는 개발자.
+            백엔드까지 다루는 개발자.
           </span>
         </h1>
 
