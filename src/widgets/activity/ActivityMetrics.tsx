@@ -2,8 +2,9 @@ import type { Contribution } from "./fetchContributions";
 
 interface Props {
   contributions: Contribution[];
-  totalLastYear: number;
+  total: number;
   username: string;
+  isLastYear: boolean;
 }
 
 function sumLastN(contributions: Contribution[], n: number): number {
@@ -35,21 +36,36 @@ function currentStreak(contributions: Contribution[]): number {
 
 export function ActivityMetrics({
   contributions,
-  totalLastYear,
+  total,
   username,
+  isLastYear,
 }: Props) {
-  const last7 = sumLastN(contributions, 7);
-  const last30 = sumLastN(contributions, 30);
   const longest = longestStreak(contributions);
-  const current = currentStreak(contributions);
-
-  const rows: { label: string; value: string; accent?: boolean }[] = [
-    { label: "Last 7 days", value: `${last7}`, accent: true },
-    { label: "Last 30 days", value: `${last30}` },
-    { label: "Last 12 months", value: `${totalLastYear}` },
-    { label: "Longest streak", value: `${longest}d` },
-    { label: "Current streak", value: `${current}d` },
-  ];
+  const rows = isLastYear
+    ? [
+        {
+          label: "Last 7 days",
+          value: `${sumLastN(contributions, 7)}`,
+          accent: true,
+        },
+        { label: "Last 30 days", value: `${sumLastN(contributions, 30)}` },
+        { label: "Last 12 months", value: `${total}` },
+        { label: "Longest streak", value: `${longest}d` },
+        { label: "Current streak", value: `${currentStreak(contributions)}d` },
+      ]
+    : (() => {
+        const activeDays = contributions.filter((c) => c.count > 0).length;
+        const avg =
+          contributions.length > 0
+            ? Math.round((total / contributions.length) * 10) / 10
+            : 0;
+        return [
+          { label: "Total", value: `${total}`, accent: true },
+          { label: "Active days", value: `${activeDays}` },
+          { label: "Longest streak", value: `${longest}d` },
+          { label: "Daily average", value: `${avg}` },
+        ];
+      })();
 
   return (
     <div className="flex flex-col gap-4">

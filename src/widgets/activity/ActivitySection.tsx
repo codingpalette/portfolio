@@ -1,6 +1,5 @@
 import { SectionHeader } from "@shared/ui/section-header";
-import { ContributionGrid } from "./ContributionGrid";
-import { ActivityMetrics } from "./ActivityMetrics";
+import { ActivityClient } from "./ActivityClient";
 import { fetchContributions } from "./fetchContributions";
 
 const USERNAME = "codingpalette";
@@ -14,18 +13,15 @@ export default async function ActivitySection() {
         <SectionHeader
           label="ACTIVITY"
           title="GitHub 활동"
-          description="실제로 코드를 쓰는 개발자. 최근 1년 contribution."
+          description="실제로 코드를 쓰는 개발자. 연도별 contribution을 확인할 수 있습니다."
         />
 
         {data ? (
-          <div className="grid gap-10 md:grid-cols-[1fr_220px] md:gap-12">
-            <ContributionGrid contributions={data.contributions} />
-            <ActivityMetrics
-              contributions={data.contributions}
-              totalLastYear={data.total.lastYear}
-              username={USERNAME}
-            />
-          </div>
+          <ActivityClient
+            contributions={data.contributions}
+            totals={data.total}
+            username={USERNAME}
+          />
         ) : (
           <div className="rounded-lg border border-dashed border-border px-6 py-12 text-center">
             <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
