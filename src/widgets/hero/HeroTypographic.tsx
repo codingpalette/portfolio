@@ -44,7 +44,7 @@ export default function HeroTypographic() {
 
         <div className="mt-12 border-t border-border pt-6">
           <p className="font-mono text-xs text-muted-foreground">
-            msbfms@gmail.com · Seoul, KR · Available for opportunities
+            msbfms@gmail.com · Incheon, KR · Available for opportunities
           </p>
         </div>
       </div>

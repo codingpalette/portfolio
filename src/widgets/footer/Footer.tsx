@@ -13,7 +13,7 @@ export default function Footer() {
             이성재 · Full-Stack Developer
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Seoul, KR
+            Incheon, KR
           </p>
         </div>
 

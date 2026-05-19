@@ -1,10 +1,10 @@
 import { StatCard } from "@shared/ui/stat-card";
 
 const STATS = [
-  { value: "+5", label: "Years", accent: true },
-  { value: "20+", label: "Projects" },
-  { value: "3", label: "Products" },
-  { value: "100%", label: "Shipped" },
+  { value: "+7", label: "Years", accent: true },
+  { value: "10+", label: "Projects" },
+  { value: "4", label: "Apps Shipped" },
+  { value: "3", label: "Companies" },
 ];
 
 export default function StatsSection() {

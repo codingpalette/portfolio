@@ -9,21 +9,31 @@ interface ExperienceItem {
 
 const EXPERIENCE: ExperienceItem[] = [
   {
-    period: "2024 — Present",
-    company: "Company A",
-    role: "Senior Frontend Engineer",
+    period: "2021.08 — Present",
+    company: "㈜엠에스벤터",
+    role: "Full-Stack Developer · 개발팀",
     highlights: [
-      "주요 서비스 리뉴얼 리딩, 핵심 페이지 LCP 40% 개선",
-      "디자인 시스템 v2 설계 및 8개 팀 도입",
+      "프랜차이즈 ERP '프담' — MFA 아키텍처 기반 통합 관리 시스템, React + TypeScript + FastAPI + PHP. 다수 브랜드에 서비스 중",
+      "축산물 이력관리 '이력스캔' — Next.js + FastAPI + Flutter 풀스택 설계. Apple App Store 배포",
+      "B2B 유통 '백푸드' · 가맹점 발주 '발주닷컴' — Flutter WebView 하이브리드 앱, Android/iOS 동시 출시",
     ],
   },
   {
-    period: "2022 — 2024",
-    company: "Company B",
-    role: "Full-Stack Engineer",
+    period: "2020.11 — 2021.08",
+    company: "㈜랭킹지지",
+    role: "Frontend Developer · 개발팀",
     highlights: [
-      "Supabase 기반 SaaS MVP 출시, 6개월 MAU 5천 달성",
-      "결제·인증 등 핵심 기능 단독 구현",
+      "리그오브레전드 연승 챌린지 게임 커뮤니티 플랫폼 개발",
+      "React Native 기반 Android/iOS 모바일 앱 동시 배포",
+    ],
+  },
+  {
+    period: "2018.10 — 2020.10",
+    company: "나누리",
+    role: "Frontend Developer · 개발팀",
+    highlights: [
+      "모바일 초대장 서비스 — 다양한 스킨 템플릿 시스템 구축",
+      "LG 아카데미 직무평가 (Vue.js + Laravel), 이움스토어팜 영상 자동 렌더링 등 외주 개발",
     ],
   },
 ];
