@@ -5,6 +5,18 @@
 개발자 포트폴리오 웹사이트. Next.js 16 + React 19 + Supabase + Three.js 기반.
 FSD(Feature-Sliced Design) 아키텍처를 엄격히 따른다.
 
+## 📚 참고 문서 (반드시 먼저 읽기)
+
+UI/디자인/컴포넌트 관련 작업을 시작하기 전에 **반드시** 다음 문서를 먼저 읽는다:
+
+- **[DESIGN.md](./DESIGN.md)** — 디자인 시스템의 단일 진실 공급원 (SSOT).
+  컬러 토큰(OKLCH), 타이포그래피(Pretendard + Geist Mono), 스페이싱, 컴포넌트 패턴,
+  모션 규칙, 홈 페이지 섹션 구조, 마이그레이션 노트가 모두 여기 있다.
+  새 컴포넌트/페이지를 만들 때 DESIGN.md의 토큰과 패턴을 따른다.
+  **DESIGN.md와 충돌하는 코드는 작성 금지.** 충돌 발견 시 사용자에게 알린다.
+
+- 작업 결과로 디자인 시스템이 진화하면 DESIGN.md를 같이 업데이트한다 (compound 단계).
+
 ---
 
 ## 🧬 컴파운드 엔지니어링 (Compound Engineering)
@@ -224,8 +236,9 @@ CRON_SECRET=                # Vercel Cron 인증용
 - 스타일: new-york
 - 컴포넌트 경로: `@shared/ui`
 - 유틸리티 경로: `@shared/lib/utils`
-- 아이콘: Lucide React
+- 아이콘: Lucide React (이모지 사용 금지 — [DESIGN.md](./DESIGN.md) §8)
 - 추가 명령: `pnpm dlx shadcn@latest add <component>`
+- **shadcn 기본 토큰은 [DESIGN.md](./DESIGN.md)의 OKLCH 토큰으로 덮어쓴다.** 컴포넌트 추가 후 색/반경/패딩은 DESIGN.md 토큰에 맞춰 조정.
 
 ## 코딩 컨벤션
 
