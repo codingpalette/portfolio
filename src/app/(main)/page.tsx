@@ -1,6 +1,10 @@
-import { Hero3D } from "@widgets/hero";
-import { AboutSection } from "@widgets/about";
+import { HeroTypographic } from "@widgets/hero";
+import { StatsSection } from "@widgets/stats";
+import { StackSection } from "@widgets/stack";
+import { ActivitySection } from "@widgets/activity";
 import { ProjectGallery } from "@widgets/projects";
+import { ExperienceSection } from "@widgets/experience";
+import { ContactSection } from "@widgets/contact";
 import { createClient } from "@shared/api/supabase/server";
 import type { Project } from "@entities/project";
 
@@ -17,9 +21,13 @@ export default async function Home() {
 
   return (
     <main>
-      <Hero3D />
-      <AboutSection />
+      <HeroTypographic />
+      <StatsSection />
+      <StackSection />
+      <ActivitySection />
       <ProjectGallery projects={(data as Project[]) ?? []} />
+      <ExperienceSection />
+      <ContactSection />
     </main>
   );
 }

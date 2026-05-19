@@ -15,11 +15,11 @@ const TILE_COLORS: Record<number, string> = {
   256: "bg-yellow-400 text-white",
   512: "bg-yellow-300 text-gray-900",
   1024: "bg-yellow-200 text-gray-900",
-  2048: "bg-cyan-400 text-gray-900",
+  2048: "bg-[var(--accent)] text-background",
 };
 
 function getTileColor(value: number): string {
-  if (value >= 4096) return "bg-purple-500 text-white";
+  if (value >= 4096) return "bg-muted-foreground text-background";
   return TILE_COLORS[value] ?? "bg-muted dark:bg-gray-500 text-foreground";
 }
 
@@ -107,7 +107,7 @@ function MenuOverlay() {
   return (
     <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-black/60 dark:bg-gray-950/80 backdrop-blur-sm">
       <div className="text-center">
-        <h1 className="mb-2 text-7xl font-extrabold text-cyan-600 dark:text-cyan-400">2048</h1>
+        <h1 className="mb-2 text-7xl font-extrabold text-[var(--accent)]">2048</h1>
         <p className="mb-6 text-muted-foreground">숫자 타일을 합쳐 2048을 만드세요!</p>
         {highScore > 0 && (
           <p className="mb-4 text-sm text-indigo-600 dark:text-indigo-400">
@@ -116,7 +116,7 @@ function MenuOverlay() {
         )}
         <button
           onClick={handleStart}
-          className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-3 text-lg font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:scale-95"
+          className="rounded-xl border border-[var(--accent)] bg-[var(--accent-subtle)] px-8 py-3 text-lg font-semibold text-[var(--accent)] transition hover:opacity-80 active:scale-95"
         >
           게임 시작
         </button>
@@ -158,7 +158,7 @@ function GameOverOverlay() {
         <p className="mb-6 text-sm text-muted-foreground">최고 점수: {highScore.toLocaleString()}</p>
         <button
           onClick={handleRestart}
-          className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-3 text-lg font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:scale-95"
+          className="rounded-xl border border-[var(--accent)] bg-[var(--accent-subtle)] px-8 py-3 text-lg font-semibold text-[var(--accent)] transition hover:opacity-80 active:scale-95"
         >
           다시 시작
         </button>
@@ -179,13 +179,13 @@ function WinOverlay() {
   return (
     <div className="absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-black/60 dark:bg-gray-950/80 backdrop-blur-sm">
       <div className="text-center">
-        <h2 className="mb-2 text-5xl font-extrabold text-cyan-600 dark:text-cyan-400">달성!</h2>
+        <h2 className="mb-2 text-5xl font-extrabold text-[var(--accent)]">달성!</h2>
         <p className="mb-1 text-xl text-foreground">2048 타일을 만들었습니다!</p>
         <p className="mb-6 text-sm text-muted-foreground">점수: {score.toLocaleString()}</p>
         <div className="flex gap-3 justify-center">
           <button
             onClick={continueGame}
-            className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-6 py-3 font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:scale-95"
+            className="rounded-xl border border-[var(--accent)] bg-[var(--accent-subtle)] px-6 py-3 font-semibold text-[var(--accent)] transition hover:opacity-80 active:scale-95"
           >
             계속하기
           </button>
@@ -291,7 +291,7 @@ export default function Game2048() {
     >
       {/* Header */}
       <div className="mb-4 flex w-full max-w-[400px] items-center justify-between px-1">
-        <h1 className="text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">2048</h1>
+        <h1 className="text-3xl font-extrabold text-[var(--accent)]">2048</h1>
         <div className="flex gap-2">
           <ScoreBox label="점수" value={score} />
           <ScoreBox label="최고" value={highScore} />

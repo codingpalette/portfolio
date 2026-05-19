@@ -37,7 +37,7 @@ export default function LoginForm() {
     <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-card to-background px-4">
       {/* 배경 효과 */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-[var(--accent-subtle)] blur-3xl" />
         <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
       </div>
 
@@ -76,7 +76,7 @@ export default function LoginForm() {
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
                 required
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -91,7 +91,7 @@ export default function LoginForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -108,7 +108,7 @@ export default function LoginForm() {
             계정이 없으신가요?{" "}
             <Link
               href="/signup"
-              className="text-cyan-600 dark:text-cyan-400 transition-colors hover:text-cyan-700 dark:hover:text-cyan-300"
+              className="text-[var(--accent)] transition-colors hover:opacity-80"
             >
               회원가입
             </Link>

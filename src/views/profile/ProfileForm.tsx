@@ -168,7 +168,7 @@ export default function ProfileForm() {
   if (!user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent" />
       </div>
     );
   }
@@ -178,7 +178,7 @@ export default function ProfileForm() {
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-card to-background px-4">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute top-1/3 -left-32 h-80 w-80 rounded-full bg-[var(--accent-subtle)] blur-3xl" />
         <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
       </div>
 
@@ -221,7 +221,7 @@ export default function ProfileForm() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="group relative h-24 w-24 overflow-hidden rounded-full border-2 border-border transition-all hover:border-cyan-500/50"
+                className="group relative h-24 w-24 overflow-hidden rounded-full border-2 border-border transition-all hover:border-[var(--accent)]"
               >
                 {displayImage ? (
                   <Image
@@ -299,7 +299,7 @@ export default function ProfileForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -311,7 +311,7 @@ export default function ProfileForm() {
                 <span
                   className={`rounded px-2 py-1 text-xs font-medium ${
                     user.profile.role === "admin"
-                      ? "bg-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+                      ? "bg-[var(--accent-subtle)] text-[var(--accent)]"
                       : "bg-muted text-muted-foreground"
                   }`}
                 >
@@ -363,7 +363,7 @@ export default function ProfileForm() {
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 required
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -381,7 +381,7 @@ export default function ProfileForm() {
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="6자 이상"
                 required
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -399,7 +399,7 @@ export default function ProfileForm() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="새 비밀번호 재입력"
                 required
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 

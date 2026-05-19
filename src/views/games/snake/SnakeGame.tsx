@@ -348,7 +348,7 @@ export default function SnakeGame() {
       <div className="flex items-center justify-between w-full max-w-xl px-4 py-3">
         <div className="flex flex-col items-center">
           <span className="text-muted-foreground text-xs font-medium tracking-widest uppercase">점수</span>
-          <span className="text-cyan-600 dark:text-cyan-400 text-2xl font-bold tabular-nums">{score}</span>
+          <span className="text-[var(--accent)] text-2xl font-bold tabular-nums">{score}</span>
         </div>
         <div className="text-muted-foreground text-lg font-bold tracking-wider">뱀 게임</div>
         <div className="flex flex-col items-center">
@@ -384,7 +384,7 @@ export default function SnakeGame() {
               </div>
               <button
                 onClick={startGame}
-                className="w-full py-3 px-6 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold rounded-xl transition-colors text-lg"
+                className="w-full py-3 px-6 bg-[var(--accent)] hover:opacity-90 text-background font-bold rounded-xl transition-colors text-lg"
               >
                 시작하기
               </button>
@@ -403,7 +403,7 @@ export default function SnakeGame() {
               <div className="flex gap-8">
                 <div className="flex flex-col items-center">
                   <span className="text-muted-foreground text-xs uppercase tracking-widest">점수</span>
-                  <span className="text-cyan-600 dark:text-cyan-400 text-3xl font-bold tabular-nums">{score}</span>
+                  <span className="text-[var(--accent)] text-3xl font-bold tabular-nums">{score}</span>
                 </div>
                 <div className="w-px bg-border" />
                 <div className="flex flex-col items-center">
@@ -418,7 +418,7 @@ export default function SnakeGame() {
               )}
               <button
                 onClick={startGame}
-                className="w-full py-3 px-6 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold rounded-xl transition-colors text-lg"
+                className="w-full py-3 px-6 bg-[var(--accent)] hover:opacity-90 text-background font-bold rounded-xl transition-colors text-lg"
               >
                 다시 시작
               </button>

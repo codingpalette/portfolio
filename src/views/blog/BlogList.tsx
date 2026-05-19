@@ -60,7 +60,7 @@ export default function BlogList({ posts }: { posts: BlogPostSummary[] }) {
               </>
             )}
           </div>
-          <h2 className="text-xl font-bold text-foreground transition-colors group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
+          <h2 className="text-xl font-bold text-foreground transition-colors group-hover:text-[var(--accent)]">
             {post.title}
           </h2>
           {post.excerpt && (
@@ -73,7 +73,7 @@ export default function BlogList({ posts }: { posts: BlogPostSummary[] }) {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-2.5 py-0.5 text-xs text-cyan-600 dark:text-cyan-400"
+                  className="rounded-full border border-[var(--accent)] bg-[var(--accent-subtle)] px-2.5 py-0.5 text-xs text-[var(--accent)]"
                 >
                   {tag}
                 </span>

@@ -34,7 +34,7 @@ export default function Leaderboard({
             onClick={() => setActiveGame(game)}
             className={`rounded-lg px-3 py-1.5 text-xs font-medium border transition-all ${
               activeGame === game
-                ? "bg-cyan-500/20 border-cyan-500 text-cyan-700 dark:text-cyan-300"
+                ? "bg-[var(--accent-subtle)] border-[var(--accent)] text-[var(--accent)]"
                 : "bg-muted border-border text-muted-foreground hover:border-border"
             }`}
           >
@@ -66,7 +66,7 @@ export default function Leaderboard({
                 key={entry.id}
                 className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-colors ${
                   isCurrentUser
-                    ? "bg-cyan-500/10 border border-cyan-500/20"
+                    ? "bg-[var(--accent-subtle)] border border-[var(--accent)]"
                     : "hover:bg-muted/50"
                 }`}
               >
@@ -74,7 +74,7 @@ export default function Leaderboard({
                   {medal ?? `${index + 1}`}
                 </span>
                 <span
-                  className={`flex-1 truncate text-sm ${isCurrentUser ? "font-semibold text-cyan-600 dark:text-cyan-400" : "text-foreground"}`}
+                  className={`flex-1 truncate text-sm ${isCurrentUser ? "font-semibold text-[var(--accent)]" : "text-foreground"}`}
                 >
                   {entry.player_name}
                 </span>

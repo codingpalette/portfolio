@@ -48,11 +48,11 @@ const experiences = [
 
 const colorMap: Record<string, { border: string; bg: string; text: string; dot: string; line: string }> = {
   cyan: {
-    border: "border-cyan-500/30",
-    bg: "bg-cyan-500/10",
-    text: "text-cyan-700 dark:text-cyan-300",
-    dot: "bg-cyan-400",
-    line: "from-cyan-400",
+    border: "border-[var(--accent)]",
+    bg: "bg-[var(--accent-subtle)]",
+    text: "text-[var(--accent)]",
+    dot: "bg-[var(--accent)]",
+    line: "from-[var(--accent)]",
   },
   indigo: {
     border: "border-indigo-500/30",
@@ -62,11 +62,11 @@ const colorMap: Record<string, { border: string; bg: string; text: string; dot: 
     line: "from-indigo-400",
   },
   purple: {
-    border: "border-purple-500/30",
-    bg: "bg-purple-500/10",
-    text: "text-purple-600 dark:text-purple-300",
-    dot: "bg-purple-400",
-    line: "from-purple-400",
+    border: "border-border",
+    bg: "bg-muted/50",
+    text: "text-muted-foreground",
+    dot: "bg-muted-foreground",
+    line: "from-muted-foreground",
   },
   amber: {
     border: "border-amber-500/30",
@@ -125,13 +125,13 @@ export default function AboutSection() {
       {/* 배경 효과 */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/4 -left-32 h-80 w-80 rounded-full bg-indigo-500/5 blur-3xl" />
-        <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-cyan-500/5 blur-3xl" />
+        <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-[var(--accent-subtle)] blur-3xl" />
       </div>
 
       <div className="container relative z-10 mx-auto px-6">
         {/* 제목 */}
         <div className="about-title mb-16 text-center">
-          <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase">
+          <p className="mb-3 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">
             About Me
           </p>
           <h2 className="text-4xl font-bold text-foreground sm:text-5xl">
@@ -143,15 +143,15 @@ export default function AboutSection() {
           {/* 왼쪽: 자기소개 */}
           <div className="about-intro space-y-6 lg:col-span-2">
             {/* 프로필 이미지 영역 */}
-            <div className="mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 lg:mx-0">
-              <div className="flex h-full w-full items-center justify-center text-5xl font-bold text-cyan-400/60">
+            <div className="mx-auto h-40 w-40 overflow-hidden rounded-full border-2 border-[var(--accent)] bg-gradient-to-br from-[var(--accent-subtle)] to-indigo-500/20 lg:mx-0">
+              <div className="flex h-full w-full items-center justify-center text-5xl font-bold text-[var(--accent)]">
                 SJ
               </div>
             </div>
 
             <div className="space-y-4 text-center lg:text-left">
               <h3 className="text-2xl font-bold text-foreground">이성재</h3>
-              <p className="text-sm font-medium text-cyan-600 dark:text-cyan-400">
+              <p className="text-sm font-medium text-[var(--accent)]">
                 Full-Stack Developer & AI Builder
               </p>
               <p className="leading-relaxed text-muted-foreground">

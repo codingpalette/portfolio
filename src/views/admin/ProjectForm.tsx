@@ -48,17 +48,17 @@ function TagInput({
   };
 
   return (
-    <div className="flex min-h-[42px] flex-wrap gap-1.5 rounded-lg border border-border bg-card/50 px-3 py-2 transition-all focus-within:border-cyan-500/50 focus-within:ring-1 focus-within:ring-cyan-500/50">
+    <div className="flex min-h-[42px] flex-wrap gap-1.5 rounded-lg border border-border bg-card/50 px-3 py-2 transition-all focus-within:border-[var(--accent)] focus-within:ring-1 focus-within:ring-[var(--accent)]">
       {tags.map((tag) => (
         <span
           key={tag}
-          className="flex items-center gap-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-0.5 text-xs text-cyan-300"
+          className="flex items-center gap-1 rounded-full border border-[var(--accent)] bg-[var(--accent-subtle)] px-2.5 py-0.5 text-xs text-[var(--accent)]"
         >
           {tag}
           <button
             type="button"
             onClick={() => onChange(tags.filter((t) => t !== tag))}
-            className="ml-0.5 text-cyan-400 hover:text-foreground"
+            className="ml-0.5 text-[var(--accent)] hover:text-foreground"
           >
             &times;
           </button>
@@ -167,7 +167,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+            className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
           />
         </div>
 
@@ -184,7 +184,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-            className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+            className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
           />
         </div>
 
@@ -201,7 +201,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 onClick={() => setCategory(cat)}
                 className={`rounded-full border px-3 py-1 text-sm transition-all ${
                   category === cat
-                    ? "border-cyan-500 bg-cyan-500/20 text-cyan-300"
+                    ? "border-[var(--accent)] bg-[var(--accent-subtle)] text-[var(--accent)]"
                     : "border-border bg-card/50 text-muted-foreground hover:border-border hover:text-foreground"
                 }`}
               >
@@ -221,7 +221,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 }
               }}
               placeholder="직접 입력..."
-              className="flex-1 rounded-lg border border-border bg-card/50 px-3 py-1.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              className="flex-1 rounded-lg border border-border bg-card/50 px-3 py-1.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
             />
             <button
               type="button"
@@ -262,7 +262,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
               placeholder="https://"
               value={link}
               onChange={(e) => setLink(e.target.value)}
-              className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
             />
           </div>
 
@@ -279,7 +279,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
               placeholder="https://github.com/..."
               value={github}
               onChange={(e) => setGithub(e.target.value)}
-              className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
             />
           </div>
         </div>
@@ -297,7 +297,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
               type="number"
               value={sortOrder}
               onChange={(e) => setSortOrder(Number(e.target.value))}
-              className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+              className="w-full rounded-lg border border-border bg-card/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
             />
             <p className="text-xs text-muted-foreground">낮을수록 먼저 표시</p>
           </div>
@@ -308,7 +308,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 type="checkbox"
                 checked={isPublished}
                 onChange={(e) => setIsPublished(e.target.checked)}
-                className="h-4 w-4 rounded border-border bg-muted text-cyan-500 focus:ring-cyan-500/50"
+                className="h-4 w-4 rounded border-border bg-muted text-[var(--accent)] focus:ring-[var(--accent)]"
               />
               <span className="text-sm text-foreground">공개</span>
             </label>

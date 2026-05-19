@@ -16,7 +16,7 @@ export default function AdminLayout({
       <div className="container mx-auto px-6 py-8">
         <div className="mb-8 flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">관리자</h1>
-          <span className="rounded bg-cyan-500/20 px-2 py-0.5 text-xs text-cyan-600 dark:text-cyan-400">
+          <span className="rounded bg-[var(--accent-subtle)] px-2 py-0.5 text-xs text-[var(--accent)]">
             Admin
           </span>
         </div>

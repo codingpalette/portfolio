@@ -32,7 +32,7 @@ export default function GameStats({ stats }: GameStatsProps) {
               key={stat.game}
               className="rounded-lg border border-border bg-muted/30 p-4"
             >
-              <p className="mb-2 text-sm font-medium text-cyan-600 dark:text-cyan-400">{config.label}</p>
+              <p className="mb-2 text-sm font-medium text-[var(--accent)]">{config.label}</p>
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">최고 점수</span>

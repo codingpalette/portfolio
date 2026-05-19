@@ -15,7 +15,7 @@ export default async function BlogPage() {
     <main className="min-h-screen bg-gradient-to-b from-background via-card to-background pt-28 pb-20">
       <div className="container mx-auto max-w-3xl px-6">
         <div className="mb-10 text-center">
-          <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase">
+          <p className="mb-3 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">
             Blog
           </p>
           <h1 className="text-4xl font-bold text-foreground">블로그</h1>
