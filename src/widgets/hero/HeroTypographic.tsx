@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RotatingTech } from "./RotatingTech";
 
 export default function HeroTypographic() {
   return (
@@ -18,6 +19,13 @@ export default function HeroTypographic() {
             백엔드까지 다루는 개발자.
           </span>
         </h1>
+
+        <div className="mt-8 flex items-baseline gap-3">
+          <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            ─ WORKS WITH
+          </span>
+          <RotatingTech />
+        </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <a
