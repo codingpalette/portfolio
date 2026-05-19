@@ -40,7 +40,7 @@ const EXPERIENCE: ExperienceItem[] = [
 
 export default function ExperienceSection() {
   return (
-    <section className="border-b border-border">
+    <section id="experience" className="border-b border-border">
       <div className="mx-auto max-w-[1080px] px-4 py-20 md:px-8 md:py-32">
         <SectionHeader label="EXPERIENCE" title="이력" />
 

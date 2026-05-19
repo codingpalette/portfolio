@@ -2,7 +2,7 @@ import { SectionHeader } from "@shared/ui/section-header";
 
 export default function ContactSection() {
   return (
-    <section>
+    <section id="contact">
       <div className="mx-auto max-w-[1080px] px-4 py-20 md:px-8 md:py-32">
         <SectionHeader
           label="GET IN TOUCH"

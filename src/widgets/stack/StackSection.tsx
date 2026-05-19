@@ -22,7 +22,7 @@ const STACKS: { category: string; items: string[] }[] = [
 
 export default function StackSection() {
   return (
-    <section className="border-b border-border">
+    <section id="stack" className="border-b border-border">
       <div className="mx-auto max-w-[1080px] px-4 py-20 md:px-8 md:py-32">
         <SectionHeader
           label="TECH STACK"
