@@ -21,7 +21,7 @@ export default async function AdminBlogPage() {
         <h2 className="text-xl font-bold text-foreground">블로그 관리</h2>
         <Link
           href="/admin/blog/new"
-          className="rounded-lg bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-700 transition-all hover:bg-cyan-500/20 dark:bg-cyan-500/20 dark:text-cyan-300 dark:hover:bg-cyan-500/30"
+          className="rounded-lg bg-[var(--accent-subtle)] px-4 py-2 text-sm font-medium text-[var(--accent)] transition-all hover:opacity-80"
         >
           + 새 포스트
         </Link>
@@ -32,7 +32,7 @@ export default async function AdminBlogPage() {
           <p className="text-muted-foreground">등록된 포스트가 없습니다</p>
           <Link
             href="/admin/blog/new"
-            className="mt-4 inline-block text-sm text-cyan-400 hover:text-cyan-300"
+            className="mt-4 inline-block text-sm text-[var(--accent)] hover:opacity-80"
           >
             첫 포스트를 작성하세요 &rarr;
           </Link>

@@ -172,7 +172,7 @@ function SidePanel() {
       <div className="rounded-lg border border-border bg-card dark:bg-gray-900/80 p-3 space-y-3">
         <div>
           <p className="text-xs font-semibold tracking-widest text-muted-foreground">SCORE</p>
-          <p className="text-lg font-bold text-cyan-600 dark:text-cyan-400">{score.toLocaleString()}</p>
+          <p className="text-lg font-bold text-[var(--accent)]">{score.toLocaleString()}</p>
         </div>
         <div>
           <p className="text-xs font-semibold tracking-widest text-muted-foreground">BEST</p>
@@ -243,7 +243,7 @@ function MobileControls() {
         ↻
       </button>
       {/* Hard drop */}
-      <button onTouchStart={(e) => { e.preventDefault(); hardDrop(); }} className={`${btnClass} w-14 bg-cyan-500/20 border-cyan-500/30 text-cyan-400`}>
+      <button onTouchStart={(e) => { e.preventDefault(); hardDrop(); }} className={`${btnClass} w-14 bg-[var(--accent-subtle)] border-[var(--accent)] text-[var(--accent)]`}>
         ⬇
       </button>
     </div>
@@ -289,7 +289,7 @@ function MenuOverlay() {
     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/70 backdrop-blur-sm">
       <div className="text-center px-6">
         <h1 className="mb-2 text-5xl font-bold tracking-tight text-foreground">
-          <span className="text-cyan-600 dark:text-cyan-400">테트</span>
+          <span className="text-[var(--accent)]">테트</span>
           <span className="text-indigo-600 dark:text-indigo-400">리스</span>
         </h1>
         <p className="mb-6 text-muted-foreground">블록을 쌓아 줄을 완성하세요</p>
@@ -300,7 +300,7 @@ function MenuOverlay() {
         )}
         <button
           onClick={handleStart}
-          className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-3 text-lg font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:scale-95"
+          className="rounded-xl border border-[var(--accent)] bg-[var(--accent-subtle)] px-8 py-3 text-lg font-semibold text-[var(--accent)] transition hover:opacity-80 active:scale-95"
         >
           게임 시작
         </button>
@@ -355,7 +355,7 @@ function GameOverOverlay() {
         </p>
         <button
           onClick={handleRestart}
-          className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-3 text-lg font-semibold text-cyan-400 transition hover:bg-cyan-500/30 active:scale-95"
+          className="rounded-xl border border-[var(--accent)] bg-[var(--accent-subtle)] px-8 py-3 text-lg font-semibold text-[var(--accent)] transition hover:opacity-80 active:scale-95"
         >
           다시 시작
         </button>

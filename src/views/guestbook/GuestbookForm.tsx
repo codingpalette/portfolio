@@ -38,7 +38,7 @@ export default function GuestbookForm() {
           방명록을 작성하려면{" "}
           <a
             href="/login"
-            className="text-cyan-600 dark:text-cyan-400 transition-colors hover:text-cyan-700 dark:hover:text-cyan-300"
+            className="text-[var(--accent)] transition-colors hover:opacity-80"
           >
             로그인
           </a>

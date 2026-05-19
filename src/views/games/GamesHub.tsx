@@ -25,7 +25,7 @@ const games: GameItem[] = [
     description: "클래식 블록 쌓기 게임",
     href: "/games/tetris",
     emoji: "🧱",
-    color: "from-cyan-500/20 to-blue-500/20 border-cyan-500/30",
+    color: "from-[var(--accent-subtle)] to-blue-500/20 border-[var(--accent)]",
     ready: true,
   },
   {
@@ -59,7 +59,7 @@ export default function GamesHub() {
     <div className="min-h-screen bg-gradient-to-b from-background via-card to-background pt-24 pb-16">
       <div className="container mx-auto px-6">
         <div className="mb-12 text-center">
-          <p className="mb-3 text-sm font-semibold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase">
+          <p className="mb-3 text-sm font-semibold tracking-widest text-[var(--accent)] uppercase">
             Mini Games
           </p>
           <h1 className="text-4xl font-bold text-foreground sm:text-5xl">Games</h1>

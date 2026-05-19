@@ -36,7 +36,7 @@ export default function BlogDetail({ post }: { post: BlogPost }) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-600 dark:text-cyan-400"
+                className="rounded-full border border-[var(--accent)] bg-[var(--accent-subtle)] px-3 py-1 text-xs text-[var(--accent)]"
               >
                 {tag}
               </span>

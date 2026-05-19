@@ -14,9 +14,9 @@ const NUMBER_COLORS: Record<number, string> = {
   1: "text-blue-600 dark:text-blue-400",
   2: "text-green-600 dark:text-green-400",
   3: "text-red-600 dark:text-red-400",
-  4: "text-purple-600 dark:text-purple-400",
+  4: "text-muted-foreground",
   5: "text-orange-600 dark:text-orange-400",
-  6: "text-cyan-600 dark:text-cyan-400",
+  6: "text-[var(--accent)]",
   7: "text-pink-600 dark:text-pink-400",
   8: "text-gray-600 dark:text-gray-400",
 };
@@ -156,7 +156,7 @@ function MenuOverlay() {
                   onClick={() => selectDifficulty(d)}
                   className={`w-full py-2.5 px-4 rounded-lg border text-sm font-medium transition-all ${
                     difficulty === d
-                      ? "bg-cyan-500/20 border-cyan-500 text-cyan-700 dark:text-cyan-300"
+                      ? "bg-[var(--accent-subtle)] border-[var(--accent)] text-[var(--accent)]"
                       : "bg-muted dark:bg-gray-800 border-border text-foreground hover:border-border hover:bg-accent dark:hover:bg-gray-700"
                   }`}
                 >
@@ -172,7 +172,7 @@ function MenuOverlay() {
 
         <button
           onClick={startGame}
-          className="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold rounded-lg transition-colors text-base"
+          className="w-full py-3 bg-[var(--accent)] hover:opacity-90 text-background font-bold rounded-lg transition-colors text-base"
         >
           게임 시작
         </button>
@@ -214,10 +214,10 @@ function WinOverlay({
   const isNewBest = best === timer;
 
   return (
-    <div className="absolute inset-0 z-20 flex items-center justify-center bg-cyan-950/70 backdrop-blur-sm">
-      <div className="flex flex-col items-center gap-4 p-8 bg-card dark:bg-gray-900 rounded-2xl border border-cyan-600 shadow-2xl">
+    <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/70 backdrop-blur-sm">
+      <div className="flex flex-col items-center gap-4 p-8 bg-card dark:bg-gray-900 rounded-2xl border border-[var(--accent)] shadow-2xl">
         <div className="text-5xl">😎</div>
-        <h2 className="text-3xl font-bold text-cyan-700 dark:text-cyan-300">클리어!</h2>
+        <h2 className="text-3xl font-bold text-[var(--accent)]">클리어!</h2>
         <p className="text-foreground text-sm">
           클리어 시간:{" "}
           <span className="font-bold text-foreground">{formatTime(timer)}</span>
@@ -232,7 +232,7 @@ function WinOverlay({
         )}
         <button
           onClick={onRestart}
-          className="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold rounded-lg transition-colors"
+          className="px-6 py-2.5 bg-[var(--accent)] hover:opacity-90 text-background font-bold rounded-lg transition-colors"
         >
           다시 시작
         </button>
@@ -318,7 +318,7 @@ export default function MinesweeperGame() {
               }}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
                 difficulty === d
-                  ? "bg-cyan-500/20 border-cyan-500 text-cyan-700 dark:text-cyan-300"
+                  ? "bg-[var(--accent-subtle)] border-[var(--accent)] text-[var(--accent)]"
                   : "bg-muted dark:bg-gray-800 border-border text-muted-foreground hover:border-border"
               }`}
             >

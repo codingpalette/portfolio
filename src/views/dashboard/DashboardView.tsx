@@ -62,7 +62,7 @@ export default function DashboardView({
   if (!user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent" />
       </div>
     );
   }
@@ -70,14 +70,14 @@ export default function DashboardView({
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-background via-card to-background px-4 pt-28 pb-16">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 -left-32 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute top-1/4 -left-32 h-80 w-80 rounded-full bg-[var(--accent-subtle)] blur-3xl" />
         <div className="absolute -right-32 bottom-1/3 h-80 w-80 rounded-full bg-indigo-500/10 blur-3xl" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-3xl">
         {/* 유저 인사 */}
         <div className="mb-10 flex items-center gap-4">
-          <div className="h-16 w-16 overflow-hidden rounded-full border-2 border-cyan-500/30">
+          <div className="h-16 w-16 overflow-hidden rounded-full border-2 border-[var(--accent)]">
             {user.profile.avatar_url ? (
               <Image
                 src={user.profile.avatar_url}
@@ -87,7 +87,7 @@ export default function DashboardView({
                 className="h-full w-full object-cover"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center bg-muted text-xl font-bold text-cyan-600/60 dark:text-cyan-400/60">
+              <div className="flex h-full w-full items-center justify-center bg-muted text-xl font-bold text-[var(--accent)]">
                 {user.profile.name?.[0]?.toUpperCase() ?? "?"}
               </div>
             )}
@@ -113,7 +113,7 @@ export default function DashboardView({
               <span
                 className={`inline-block rounded px-2 py-0.5 text-xs font-medium ${
                   user.profile.role === "admin"
-                    ? "bg-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+                    ? "bg-[var(--accent-subtle)] text-[var(--accent)]"
                     : "bg-muted/50 text-muted-foreground"
                 }`}
               >
@@ -131,7 +131,7 @@ export default function DashboardView({
               onClick={() => setActiveTab(tab.key)}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                 activeTab === tab.key
-                  ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300"
+                  ? "bg-[var(--accent-subtle)] text-[var(--accent)]"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >
@@ -149,7 +149,7 @@ export default function DashboardView({
                 href={link.href}
                 className="group flex items-center gap-4 rounded-xl border border-border bg-card/50 p-5 backdrop-blur-sm transition-all hover:border-border hover:bg-card"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 transition-colors group-hover:bg-cyan-500/20">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--accent-subtle)] text-[var(--accent)] transition-colors group-hover:bg-[var(--accent-subtle)]">
                   {link.icon}
                 </div>
                 <div>

@@ -52,8 +52,8 @@ export default function SignupForm() {
     <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-card to-background px-4">
       {/* 배경 효과 */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/3 -right-32 h-80 w-80 rounded-full bg-purple-500/10 blur-3xl" />
-        <div className="absolute -left-32 bottom-1/3 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute top-1/3 -right-32 h-80 w-80 rounded-full bg-[var(--accent-subtle)] blur-3xl" />
+        <div className="absolute -left-32 bottom-1/3 h-80 w-80 rounded-full bg-[var(--accent-subtle)] blur-3xl" />
       </div>
 
       <div className="relative z-10 w-full max-w-md">
@@ -91,7 +91,7 @@ export default function SignupForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -108,7 +108,7 @@ export default function SignupForm() {
                 required
                 minLength={3}
                 maxLength={20}
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -124,7 +124,7 @@ export default function SignupForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -140,7 +140,7 @@ export default function SignupForm() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
                 minLength={6}
-                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50"
+                className="w-full rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground placeholder-muted-foreground outline-none transition-all focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -157,7 +157,7 @@ export default function SignupForm() {
             이미 계정이 있으신가요?{" "}
             <Link
               href="/login"
-              className="text-cyan-600 dark:text-cyan-400 transition-colors hover:text-cyan-700 dark:hover:text-cyan-300"
+              className="text-[var(--accent)] transition-colors hover:opacity-80"
             >
               로그인
             </Link>

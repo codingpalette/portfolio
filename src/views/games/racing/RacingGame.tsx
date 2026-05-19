@@ -51,7 +51,7 @@ function HUD() {
       </div>
       <div className="rounded-lg border border-border bg-black/50 px-4 py-2 backdrop-blur-sm">
         <p className="text-xs text-muted-foreground">SPEED</p>
-        <p className="text-xl font-bold text-cyan-600 dark:text-cyan-400">
+        <p className="text-xl font-bold text-[var(--accent)]">
           {Math.floor(speed)} km/h
         </p>
       </div>
@@ -83,7 +83,7 @@ function MenuOverlay() {
     <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="text-center">
         <h1 className="mb-2 text-5xl font-bold text-white">
-          <span className="text-cyan-400">VOXEL</span> RACER
+          <span className="text-[var(--accent)]">VOXEL</span> RACER
         </h1>
         <p className="mb-8 text-muted-foreground">
           장애물을 피하며 최대한 멀리 달리세요
@@ -95,7 +95,7 @@ function MenuOverlay() {
         )}
         <button
           onClick={handleStart}
-          className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-3 text-lg font-semibold text-cyan-400 transition hover:bg-cyan-500/30"
+          className="rounded-xl border border-[var(--accent)] bg-[var(--accent-subtle)] px-8 py-3 text-lg font-semibold text-[var(--accent)] transition hover:opacity-80"
         >
           게임 시작
         </button>
@@ -145,7 +145,7 @@ function GameOverOverlay() {
         </p>
         <button
           onClick={handleRestart}
-          className="rounded-xl border border-cyan-500/30 bg-cyan-500/20 px-8 py-3 text-lg font-semibold text-cyan-400 transition hover:bg-cyan-500/30"
+          className="rounded-xl border border-[var(--accent)] bg-[var(--accent-subtle)] px-8 py-3 text-lg font-semibold text-[var(--accent)] transition hover:opacity-80"
         >
           다시 시작
         </button>
