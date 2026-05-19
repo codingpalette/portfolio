@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { RotatingTech } from "./RotatingTech";
+import { HeroSpotlight } from "./HeroSpotlight";
 
 export default function HeroTypographic() {
   return (
-    <section className="border-b border-border">
-      <div className="mx-auto max-w-[1080px] px-4 py-24 md:px-8 md:py-32">
+    <section className="relative overflow-hidden border-b border-border">
+      <HeroSpotlight />
+      <div className="relative mx-auto max-w-[1080px] px-4 py-24 md:px-8 md:py-32">
         <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
           ─ INTRODUCTION
         </p>
