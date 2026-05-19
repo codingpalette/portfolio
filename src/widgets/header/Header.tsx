@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "@features/auth";
 import { ThemeToggle } from "@shared/ui/theme-toggle";
 import { cn } from "@shared/lib/utils";
+import { HeaderClock } from "./HeaderClock";
 
 const navLinks = [
   { label: "Stack", href: "/#stack" },
@@ -76,6 +77,7 @@ export default function Header() {
         </ul>
 
         <div className="flex items-center gap-3">
+          <HeaderClock />
           <ThemeToggle />
           {isLoading ? (
             <div className="h-8 w-20 animate-pulse rounded bg-muted" />
