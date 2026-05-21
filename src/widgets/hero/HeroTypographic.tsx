@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { RotatingTech } from "./RotatingTech";
 import { HeroSpotlight } from "./HeroSpotlight";
 
@@ -36,12 +35,6 @@ export default function HeroTypographic() {
           >
             Get in touch →
           </a>
-          <Link
-            href="/projects"
-            className="inline-flex h-10 items-center rounded-md border border-[var(--border-strong)] px-5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-          >
-            View projects
-          </Link>
         </div>
 
         <div className="mt-12 border-t border-border pt-6">
